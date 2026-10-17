@@ -45,7 +45,7 @@
 % ============================================================
 \geometry{
     left=2cm, right=2cm, top=2.5cm, bottom=2.5cm,
-    headheight=1.5cm, headsep=0.8cm, footskip=1.2cm
+    headheight=1.5cm, headsep=0.8cm, footskip=1.5cm
 }
 
 % ============================================================
@@ -87,39 +87,65 @@
 \fancyhead[RO]{\color{primaryBlue}\textbf{P20 STUDY}~~\headerdecorright}
 \fancyhead[LE]{\headerdecorleft~~\color{primaryBlue}\textbf{Phần Ngoại Ngữ -- Tiếng Anh}}
 \fancyhead[RE]{\color{primaryBlue}\textbf{P20 STUDY}~~\headerdecorright}
-\renewcommand{\headrulewidth}{0pt}
 
 \newcommand{\teacherinfo}{{\color{textDark}\small\textit{Giáo viên: Đào Anh Phúc}}}
 \newcommand{\pagenumbox}{%
-    \tikz[baseline=-0.5ex]{\node[draw=primaryBlue, fill=pastelBlue, rounded corners=2pt,
-        inner sep=3pt, font=\small\bfseries, text=primaryBlue] {\thepage};}%
+    \tikz[baseline=-0.5ex]{
+        \node[draw=primaryBlue, fill=pastelBlue, rounded corners=3pt,
+              inner sep=4pt, font=\small\bfseries, line width=0.8pt]
+              {\color{primaryBlue}Trang \thepage};
+    }%
 }
-\newcommand{\footersep}{\color{lightBlue}$\vert$}
+\newcommand{\footersep}{%
+    \tikz[baseline=-0.5ex]{\fill[secondaryBlue] (0,0) circle (1.5pt);}%
+}
 
-\fancyfoot[LO]{\pagenumbox~~\footersep}
-\fancyfoot[RO]{\vphantom{\pagenumbox}\footersep~~\teacherinfo}
-\fancyfoot[LE]{\vphantom{\pagenumbox}\teacherinfo~~\footersep}
-\fancyfoot[RE]{\footersep~~\pagenumbox}
+% Odd pages — page number on the outer (right) margin
+\fancyfoot[LO]{\vphantom{\pagenumbox}\teacherinfo~~\footersep}
+\fancyfoot[RO]{\footersep~~\pagenumbox}
+% Even pages — page number on the outer (left) margin
+\fancyfoot[LE]{\pagenumbox~~\footersep}
+\fancyfoot[RE]{\vphantom{\pagenumbox}\footersep~~\teacherinfo}
 
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Custom head/foot rule pairs (thick primaryBlue + thin lightBlue), overlay via [C]
+\newcommand{\customheadrule}{%
+    \begin{tikzpicture}[remember picture, overlay]
+        \draw[primaryBlue, line width=1.2pt]
+            ([yshift=-0.5cm, xshift=2cm]current page.north west) --
+            ([yshift=-0.5cm, xshift=-2cm]current page.north east);
+        \draw[lightBlue, line width=0.4pt]
+            ([yshift=-0.6cm, xshift=2cm]current page.north west) --
+            ([yshift=-0.6cm, xshift=-2cm]current page.north east);
+    \end{tikzpicture}%
+}
 \newcommand{\customfootrule}{%
     \begin{tikzpicture}[remember picture, overlay]
         \draw[lightBlue, line width=0.4pt]
-            ([yshift=0.95cm, xshift=2cm]current page.south west) --
-            ([yshift=0.95cm, xshift=-2cm]current page.south east);
+            ([yshift=1.55cm, xshift=2cm]current page.south west) --
+            ([yshift=1.55cm, xshift=-2cm]current page.south east);
         \draw[primaryBlue, line width=1.2pt]
-            ([yshift=0.85cm, xshift=2cm]current page.south west) --
-            ([yshift=0.85cm, xshift=-2cm]current page.south east);
+            ([yshift=1.45cm, xshift=2cm]current page.south west) --
+            ([yshift=1.45cm, xshift=-2cm]current page.south east);
     \end{tikzpicture}%
 }
-\renewcommand{\footrule}{\customfootrule}
+\fancyhead[C]{\customheadrule}
+\fancyfoot[C]{\customfootrule}
 
-\newcommand{\watermark}{
+% ============================================================
+% WATERMARK (logo image, no rotation)
+% ============================================================
+\newcommand{\watermark}{%
     \begin{tikzpicture}[remember picture, overlay]
-        \node[opacity=0.04, rotate=45, font=\fontsize{72}{80}\selectfont\bfseries,
-              text=primaryBlue] at (current page.center) {P20 STUDY};
+        \node at (current page.center)
+            {\includegraphics[width=9cm]{image/LOGO_watermark_faded.png}};
     \end{tikzpicture}%
 }
 \AddToShipoutPictureBG{\watermark}
+
+\emergencystretch=3em
 
 % ============================================================
 % ENVIRONMENTS
@@ -392,2957 +418,2510 @@
 \begin{groupbox}\textbf{\large Nhóm câu hỏi về mệnh đề quan hệ}\end{groupbox}
 \question[Trắc nghiệm]{The house \underline{\hspace{1.3cm}} I grew up, has a beautiful garden that my parents planted many years ago.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{where}\hfill \choiceitem{C}{whose}\hfill \choiceitem{D}{whom}}
 
 \question[Trắc nghiệm]{They invited many people to the party, of \underline{\hspace{1.3cm}} didn’t come.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{where}\hfill \choiceitem{C}{whose}\hfill \choiceitem{D}{whom}}
 
 \question[Trắc nghiệm]{My sister has written three books, all of \underline{\hspace{1.3cm}} have become bestsellers.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{where}\hfill \choiceitem{C}{whose}\hfill \choiceitem{D}{whom}}
 
 \question[Trắc nghiệm]{That's the actor \underline{\hspace{1.3cm}} autograph I got last year!}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{whose}\hfill \choiceitem{B}{who’s}\hfill \choiceitem{C}{who}\hfill \choiceitem{D}{whom}}
 
 \question[Trắc nghiệm]{The old book, \underline{\hspace{1.3cm}} pages were torn and yellowed, was a rare first edition.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{whose}\hfill \choiceitem{C}{of whose}\hfill \choiceitem{D}{of which}}
 
 \question[Trắc nghiệm]{The panel consists of ten experts, three of \underline{\hspace{1.3cm}} have formerly worked for NASA.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{that}\hfill \choiceitem{C}{whom}\hfill \choiceitem{D}{them}}
 
 \question[Trắc nghiệm]{The company \underline{\hspace{1.3cm}} products are eco-friendly has gained a lot of customers.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{that}\hfill \choiceitem{B}{which}\hfill \choiceitem{C}{whose}\hfill \choiceitem{D}{where}}
 
 \question[Trắc nghiệm]{The car \underline{\hspace{1.3cm}} was stolen last night was found abandoned in a parking lot.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{whom}\hfill \choiceitem{C}{who}\hfill \choiceitem{D}{whose}}
 
 \question[Trắc nghiệm]{The athlete \underline{\hspace{1.3cm}} broke the world record had trained for years before achieving success.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{whom}\hfill \choiceitem{B}{who}\hfill \choiceitem{C}{which}\hfill \choiceitem{D}{whose}}
 
 \question[Trắc nghiệm]{The movie \underline{\hspace{1.3cm}} won the Oscar last year is based on a true story.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{where}\hfill \choiceitem{B}{when}\hfill \choiceitem{C}{who}\hfill \choiceitem{D}{that}}
 
 \question[Trắc nghiệm]{The restaurant \underline{\hspace{1.3cm}} we had dinner last night serves amazing seafood.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{where}\hfill \choiceitem{C}{that}\hfill \choiceitem{D}{All are correct}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{which}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{where}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{that}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{All are correct}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The restaurant \underline{\hspace{1.3cm}} we had dinner at last night serves amazing seafood.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{where}\hfill \choiceitem{C}{whose}\hfill \choiceitem{D}{when}}
 
 \question[Trắc nghiệm]{The restaurant \underline{\hspace{1.3cm}} serves amazing seafood is always fully booked on weekends.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{where}\hfill \choiceitem{B}{which}\hfill \choiceitem{C}{that}\hfill \choiceitem{D}{Both B and C are correct}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{where}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{which}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{that}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Both B and C are correct}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The book \underline{\hspace{1.3cm}} was so interesting that I couldn’t put it down.}
 
-\vspace{6pt}
-\choiceitem{A}{that I borrowed from the library}
-
-\vspace{3pt}
-
-\choiceitem{B}{from that I borrowed the library}
-
-\vspace{3pt}
-
-\choiceitem{C}{from which I borrowed the library}
-
-\vspace{3pt}
-
-\choiceitem{D}{which I borrowed the library}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{that I borrowed from the library}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{from that I borrowed the library}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{from which I borrowed the library}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{which I borrowed the library}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The woman \underline{\hspace{1.3cm}} we met at the conference is an expert in artificial intelligence.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{who}\hfill \choiceitem{B}{whom}\hfill \choiceitem{C}{that}\hfill \choiceitem{D}{All are correct}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{who}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{whom}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{that}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{All are correct}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I will never forget the day \underline{\hspace{1.3cm}} I received my university acceptance letter.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{where}\hfill \choiceitem{B}{when}\hfill \choiceitem{C}{which}\hfill \choiceitem{D}{that}}
 
 \question[Trắc nghiệm]{I don’t understand the reason \underline{\hspace{1.3cm}} he ignored my messages yesterday.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{why}\hfill \choiceitem{B}{where}\hfill \choiceitem{C}{which}\hfill \choiceitem{D}{whose}}
 
 \question[Trắc nghiệm]{The museum \underline{\hspace{1.3cm}} we visited last weekend had an amazing collection of ancient artifacts.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{where}\hfill \choiceitem{B}{in which}\hfill \choiceitem{C}{which}\hfill \choiceitem{D}{in where}}
 
 \question[Trắc nghiệm]{The actor with \underline{\hspace{1.3cm}} I had a chance to take a photo is incredibly talented.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{whose}\hfill \choiceitem{C}{who}\hfill \choiceitem{D}{whom}}
 
 \question[Trắc nghiệm]{The novel \underline{\hspace{1.3cm}} the movie is based was written over 50 years ago.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{on which}\hfill \choiceitem{C}{from which}\hfill \choiceitem{D}{that}}
 
 \question[Trắc nghiệm]{Taylor Swift, \underline{\hspace{1.3cm}} millions of fans adore, has won multiple Grammy Awards.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{that}\hfill \choiceitem{B}{whose}\hfill \choiceitem{C}{whom}\hfill \choiceitem{D}{which}}
 
 \question[Trắc nghiệm]{My father \underline{\hspace{1.3cm}} taught me how to play the guitar.}
 
-\vspace{6pt}
-\choiceitem{A}{whose passion for music is incredible}
-
-\vspace{3pt}
-
-\choiceitem{B}{whose passion for music is incredible,}
-
-\vspace{3pt}
-
-\choiceitem{C}{his passion for music is incredible}
-
-\vspace{3pt}
-
-\choiceitem{D}{whose passion for music incredible,}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{whose passion for music is incredible}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{whose passion for music is incredible,}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{his passion for music is incredible}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{whose passion for music incredible,}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Elon Musk, \underline{\hspace{1.3cm}}, is one of the most influential entrepreneurs today.}
 
-\vspace{6pt}
-\choiceitem{A}{whom is the CEO of Tesla}
-
-\vspace{3pt}
-
-\choiceitem{B}{,who was the CEO of Tesla}
-
-\vspace{3pt}
-
-\choiceitem{C}{who the CEO of Tesla}
-
-\vspace{3pt}
-
-\choiceitem{D}{,the CEO of Tesla}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{whom is the CEO of Tesla}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{,who was the CEO of Tesla}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{who the CEO of Tesla}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{,the CEO of Tesla}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{New York, \underline{\hspace{1.3cm}} the United Nations headquarters is located, is a vibrant and multicultural city.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{which}\hfill \choiceitem{B}{that}\hfill \choiceitem{C}{where}\hfill \choiceitem{D}{All are correct}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{which}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{that}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{where}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{All are correct}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The students \underline{\hspace{1.3cm}} need a quiet place to study.}
 
-\vspace{6pt}
-\choiceitem{A}{who were preparing for the exam}
-
-\vspace{3pt}
-
-\choiceitem{B}{,who are preparing for the exam,}
-
-\vspace{3pt}
-
-\choiceitem{C}{are preparing for the exam}
-
-\vspace{3pt}
-
-\choiceitem{D}{preparing for the exam}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{who were preparing for the exam}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{,who are preparing for the exam,}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{are preparing for the exam}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{preparing for the exam}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The smartphone \underline{\hspace{1.3cm}} last month has a great camera.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{I bought}\hfill \choiceitem{B}{buying}\hfill \choiceitem{C}{was bought}\hfill \choiceitem{D}{which I had bought}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{I bought}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{buying}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{was bought}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{which I had bought}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Paris, \underline{\hspace{1.3cm}}, is one of the most visited cities in the world.}
 
-\vspace{6pt}
-\choiceitem{A}{is the capital of France}
-
-\vspace{3pt}
-
-\choiceitem{B}{which was the capital of France}
-
-\vspace{3pt}
-
-\choiceitem{C}{where is the capital of France}
-
-\vspace{3pt}
-
-\choiceitem{D}{the capital of France}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{is the capital of France}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{which was the capital of France}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{where is the capital of France}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{the capital of France}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The conference held in London \underline{\hspace{1.3cm}} experts from around the world.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{which gathered}\hfill \choiceitem{B}{when gathered}\hfill \choiceitem{C}{gathered}\hfill \choiceitem{D}{gathering}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{which gathered}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{when gathered}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{gathered}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{gathering}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The Eiffel Tower, \underline{\hspace{1.3cm}} millions of tourists each year, is a symbol of France.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{attracts}\hfill \choiceitem{B}{where attracts}\hfill \choiceitem{C}{which attracted}\hfill \choiceitem{D}{attracting}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{attracts}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{where attracts}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{which attracted}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{attracting}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{My best friend, whom I have known for 10 years, \underline{\hspace{1.3cm}} next month.}
 
-\vspace{6pt}
-\choiceitem{A}{is getting married}
-
-\vspace{3pt}
-
-\choiceitem{B}{getting married}
-
-\vspace{3pt}
-
-\choiceitem{C}{who is getting married}
-
-\vspace{3pt}
-
-\choiceitem{D}{marrying}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{is getting married}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{getting married}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{who is getting married}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{marrying}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{My brother \underline{\hspace{1.3cm}} as an engineer, loves traveling.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{who works}\hfill \choiceitem{B}{, who works}\hfill \choiceitem{C}{works}\hfill \choiceitem{D}{, whose works}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{who works}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{, who works}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{works}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{, whose works}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The movie \underline{\hspace{1.3cm}} last month has received great reviews.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{, which was released}\hfill \choiceitem{B}{was released}\hfill \choiceitem{C}{that were released}\hfill \choiceitem{D}{released}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{, which was released}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{was released}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{that were released}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{released}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The Amazon rainforest is being destroyed rapidly, \underline{\hspace{1.3cm}} affects global biodiversity.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{that}\hfill \choiceitem{B}{which}\hfill \choiceitem{C}{where}\hfill \choiceitem{D}{when}}
 
 \question[Trắc nghiệm]{Many students study online nowadays \underline{\hspace{1.3cm}} them to learn at their own pace.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{, which allows}\hfill \choiceitem{B}{which allows}\hfill \choiceitem{C}{allowing}\hfill \choiceitem{D}{allow}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{, which allows}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{which allows}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{allowing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{allow}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{More people are working remotely, \underline{\hspace{1.3cm}} traffic congestion in big cities.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{which reducing}\hfill \choiceitem{B}{reduces}\hfill \choiceitem{C}{reducing}\hfill \choiceitem{D}{that reduces}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{which reducing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{reduces}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{reducing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{that reduces}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{That island was the second \underline{\hspace{1.3cm}} by explorers.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{to discover}\hfill \choiceitem{B}{which was discovered}\hfill \choiceitem{C}{to be discovered}\hfill \choiceitem{D}{discovered}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{to discover}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{which was discovered}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{to be discovered}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{discovered}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Social media has become an integral part of modern life, shaping the way people communicate and perceive themselves. However, excessive use has been linked to anxiety, depression, and low self-esteem. The constant exposure to curated content creates unrealistic expectations, (36) \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{causes people to perceive themselves negatively in comparison to others}
-
-\vspace{3pt}
-
-\choiceitem{B}{that makes people evaluate themselves negatively when measuring up to others}
-
-\vspace{3pt}
-
-\choiceitem{C}{which leads individuals to compare themselves unfavorably with others}
-
-\vspace{3pt}
-
-\choiceitem{D}{results in individuals viewing themselves as inferior to their peers}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{causes people to perceive themselves negatively in comparison to others}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{that makes people evaluate themselves negatively when measuring up to others}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{which leads individuals to compare themselves unfavorably with others}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{results in individuals viewing themselves as inferior to their peers}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{As urban populations continue to grow, cities face increasing pressure to develop sustainably. The demand for housing, transportation, and public services must be met without depleting natural resources or worsening climate change. Many cities have embraced green architecture and smart technologies, (37) \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{seeking to create a balance between urbanization and environmental preservation}
-
-\vspace{3pt}
-
-\choiceitem{B}{which strives to maintain equilibrium between city expansion and environmental sustainability}
-
-\vspace{3pt}
-
-\choiceitem{C}{have worked towards a sustainable coexistence of urbanization and ecological protection}
-
-\vspace{3pt}
-
-\choiceitem{D}{aim to harmonize urban growth with ecological conservation}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{seeking to create a balance between urbanization and environmental preservation}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{which strives to maintain equilibrium between city expansion and environmental sustainability}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{have worked towards a sustainable coexistence of urbanization and ecological protection}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{aim to harmonize urban growth with ecological conservation}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Loneliness, often underestimated, is a growing public health concern. Studies suggest that chronic loneliness has effects comparable to smoking or obesity, significantly increasing the risk of heart disease and mental health disorders. Addressing this issue requires social policies (38) \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{aimed to fostering community engagement and support networks}
-
-\vspace{3pt}
-
-\choiceitem{B}{is intended to enhance communal involvement and strengthen support networks}
-
-\vspace{3pt}
-
-\choiceitem{C}{which are aimed at increasing public engagement and expanding social support systems}
-
-\vspace{3pt}
-
-\choiceitem{D}{in which focus encouraging active community involvement and developing support structures}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{aimed to fostering community engagement and support networks}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{is intended to enhance communal involvement and strengthen support networks}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{which are aimed at increasing public engagement and expanding social support systems}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{in which focus encouraging active community involvement and developing support structures}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Modern society offers an overwhelming array of choices, from everyday products to major life decisions. While having options is generally beneficial, too many choices can lead to decision fatigue and dissatisfaction. This paradox, identified by psychologists, (39) \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{makes consumers second-guess their decisions and experience regret}
-
-\vspace{3pt}
-
-\choiceitem{B}{which results in consumers questioning their choices and regretting them}
-
-\vspace{3pt}
-
-\choiceitem{C}{provoking uncertainty in consumers regarding their decisions, often leaves them regretful}
-
-\vspace{3pt}
-
-\choiceitem{D}{which causes consumers to doubt their choices feel remorse}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{makes consumers second-guess their decisions and experience regret}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{which results in consumers questioning their choices and regretting them}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{provoking uncertainty in consumers regarding their decisions, often leaves them regretful}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{which causes consumers to doubt their choices feel remorse}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Technological advancements have transformed the nature of work, making remote jobs and flexible schedules increasingly common. While these changes offer convenience, they also blur the line between personal and professional life. Employers must establish clear boundaries, (40) \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{ensure employees' well-being and productivity}
-
-\vspace{3pt}
-
-\choiceitem{B}{which ensures employees' well-being and productivity}
-
-\vspace{3pt}
-
-\choiceitem{C}{ensuring employees' well-being and productivity}
-
-\vspace{3pt}
-
-\choiceitem{D}{that ensures employees' well-being and productivity}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{ensure employees' well-being and productivity}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{which ensures employees' well-being and productivity}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{ensuring employees' well-being and productivity}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{that ensures employees' well-being and productivity}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Storytelling has been an integral part of human culture for centuries, serving as a means of preserving history, imparting wisdom, and fostering social connections. From ancient myths to modern cinema, stories shape worldviews and values. In today’s digital era, the way stories are consumed and shared (41) \underline{\hspace{1.3cm}}, raising questions about authenticity and cultural preservation.}
 
-\vspace{6pt}
-\choiceitem{A}{is evolving with the rise of online platforms}
-
-\vspace{3pt}
-
-\choiceitem{B}{by which is transforming due to technological advancements}
-
-\vspace{3pt}
-
-\choiceitem{C}{that evolves to meet the demands of modern audiences}
-
-\vspace{3pt}
-
-\choiceitem{D}{evolved in response to cultural and technological shifts}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{is evolving with the rise of online platforms}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{by which is transforming due to technological advancements}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{that evolves to meet the demands of modern audiences}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{evolved in response to cultural and technological shifts}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Coral reefs, often referred to as the "rainforests of the sea," are among the most diverse ecosystems on Earth. However, they are facing unprecedented threats due to climate change, ocean acidification, and human activities. The Great Barrier Reef, for instance, has suffered from severe bleaching events, (42) \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{has compelled researchers to implement critical protection strategies}
-
-\vspace{3pt}
-
-\choiceitem{B}{which has prompted scientists to seek urgent conservation measures}
-
-\vspace{3pt}
-
-\choiceitem{C}{pushed scientists to devise emergency conservation plans}
-
-\vspace{3pt}
-
-\choiceitem{D}{whose scientists to take urgent action for conservation}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{has compelled researchers to implement critical protection strategies}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{which has prompted scientists to seek urgent conservation measures}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{pushed scientists to devise emergency conservation plans}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{whose scientists to take urgent action for conservation}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Streaming services have revolutionized the entertainment industry, rendering traditional television increasingly obsolete. Platforms like Netflix, Disney+, and Amazon Prime Video offer on-demand access to a vast library of content. However, the growing number of exclusive shows and platform restrictions has led to a phenomenon known as "subscription fatigue," (43) \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{leaving many users frustrated}
-
-\vspace{3pt}
-
-\choiceitem{B}{which causing frustration among many users}
-
-\vspace{3pt}
-
-\choiceitem{C}{whose result in widespread user dissatisfaction}
-
-\vspace{3pt}
-
-\choiceitem{D}{makes many users feel frustrated}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{leaving many users frustrated}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{which causing frustration among many users}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{whose result in widespread user dissatisfaction}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{makes many users feel frustrated}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{As fossil fuel resources dwindle and environmental concerns intensify, nations worldwide are accelerating their transition to renewable energy. Solar, wind, and hydroelectric power have gained traction, but infrastructure challenges remain. One major hurdle is energy storage (44) \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{hinders the widespread adoption of renewable energy}
-
-\vspace{3pt}
-
-\choiceitem{B}{that challenges to large-scale implementation of renewable energy}
-
-\vspace{3pt}
-
-\choiceitem{C}{which makes large-scale renewable adoption difficult}
-
-\vspace{3pt}
-
-\choiceitem{D}{impeded the transition to widespread renewable energy use}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{hinders the widespread adoption of renewable energy}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{that challenges to large-scale implementation of renewable energy}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{which makes large-scale renewable adoption difficult}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{impeded the transition to widespread renewable energy use}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Social media has redefined self-perception, blurring the lines between reality and fiction. Platforms such as Instagram and TikTok encourage users to curate their lives meticulously, often presenting an idealized version of reality. This widespread practice, (45) \underline{\hspace{1.3cm}}, has been linked to rising levels of anxiety and low self-esteem.}
 
-\vspace{6pt}
-\choiceitem{A}{which is referred to as ‘social media perfectionism’}
-
-\vspace{3pt}
-
-\choiceitem{B}{whose identification as a phenomenon called ‘social media perfectionism’}
-
-\vspace{3pt}
-
-\choiceitem{C}{is commonly called ‘social media perfectionism’}
-
-\vspace{3pt}
-
-\choiceitem{D}{termed with ‘social media perfectionism’}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{which is referred to as ‘social media perfectionism’}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{whose identification as a phenomenon called ‘social media perfectionism’}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{is commonly called ‘social media perfectionism’}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{termed with ‘social media perfectionism’}\par\vspace{4pt}
 
 \setcounter{qcounter}{0}
 \begin{groupbox}\textbf{\large Nhóm câu hỏi về Từ loại (Chuyên đề bổ trợ - Phụ lục 2)}\end{groupbox}
 \question[Trắc nghiệm]{The issue of climate change has received a lot of \underline{\hspace{1.3cm}} recently.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{attentive}\hfill \choiceitem{B}{attention}\hfill \choiceitem{C}{attend}\hfill \choiceitem{D}{attentively}}
 
 \question[Trắc nghiệm]{Swimming produces both \underline{\hspace{1.3cm}} and physical benefits.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{psychology}\hfill \choiceitem{B}{psychological}\hfill \choiceitem{C}{psychologist}\hfill \choiceitem{D}{psychologically}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{psychology}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{psychological}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{psychologist}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{psychologically}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{My friend is a good story writer; he has a rich \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{imaginable}\hfill \choiceitem{B}{imagination}\hfill \choiceitem{C}{imagine}\hfill \choiceitem{D}{imaginative}}
 
 \question[Trắc nghiệm]{The \underline{\hspace{1.3cm}} of electronic books has changed the way many people read.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{Invent}\hfill \choiceitem{B}{invention}\hfill \choiceitem{C}{inventively}\hfill \choiceitem{D}{inventive}}
 
 \question[Trắc nghiệm]{When James was in Vietnam, he tried a \underline{\hspace{1.3cm}} of Vietnamese dishes.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{variety}\hfill \choiceitem{B}{variously}\hfill \choiceitem{C}{various}\hfill \choiceitem{D}{vary}}
 
 \question[Trắc nghiệm]{According to the present law, the authorities can give poachers a severe \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{punishing}\hfill \choiceitem{B}{punish}\hfill \choiceitem{C}{punishable}\hfill \choiceitem{D}{punishment}}
 
 \question[Trắc nghiệm]{The new song has \underline{\hspace{1.3cm}} been selected for Euro 2016.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{officially}\hfill \choiceitem{B}{official}\hfill \choiceitem{C}{office}\hfill \choiceitem{D}{officer}}
 
 \question[Trắc nghiệm]{Many species of plants and animals are in \underline{\hspace{1.3cm}} of extinction.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{dangerous}\hfill \choiceitem{B}{endangered}\hfill \choiceitem{C}{danger}\hfill \choiceitem{D}{dangerously}}
 
 \question[Trắc nghiệm]{The wedding day was \underline{\hspace{1.3cm}} chosen by the parents of the groom.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{careless}\hfill \choiceitem{B}{careful}\hfill \choiceitem{C}{carefully}\hfill \choiceitem{D}{care}}
 
 \question[Trắc nghiệm]{To Americans, it is impolite to ask someone about age, \underline{\hspace{1.3cm}} and salary.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{marry}\hfill \choiceitem{B}{married}\hfill \choiceitem{C}{marrying}\hfill \choiceitem{D}{marriage}}
 
 \question[Trắc nghiệm]{Despite the plan’s emphasis on agricultural \underline{\hspace{1.3cm}}, the industrial sector received a larger share of state investment.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{developing}\hfill \choiceitem{B}{develop}\hfill \choiceitem{C}{development}\hfill \choiceitem{D}{developed}}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} have announced that a major breakthrough in medicine has been made.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{Research}\hfill \choiceitem{B}{Researchers}\hfill \choiceitem{C}{Researches}\hfill \choiceitem{D}{Researching}}
 
 \question[Trắc nghiệm]{This restaurant is \underline{\hspace{1.3cm}} with those who like Vietnamese food.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{popular}\hfill \choiceitem{B}{popularly}\hfill \choiceitem{C}{popularize}\hfill \choiceitem{D}{popularity}}
 
 \question[Trắc nghiệm]{The jobs give you lots of chances to travel abroad; it’s certainly a very \underline{\hspace{1.3cm}} offer.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{attractive}\hfill \choiceitem{B}{attract}\hfill \choiceitem{C}{attractively}\hfill \choiceitem{D}{attraction}}
 
 \question[Trắc nghiệm]{It’s necessary to listen to opinions that are \underline{\hspace{1.3cm}} from ours.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{difference}\hfill \choiceitem{B}{differently}\hfill \choiceitem{C}{differ}\hfill \choiceitem{D}{different}}
 
 \question[Trắc nghiệm]{One \underline{\hspace{1.3cm}} method for keeping our mind active is doing crossword puzzles.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{popularity}\hfill \choiceitem{B}{popular}\hfill \choiceitem{C}{popularize}\hfill \choiceitem{D}{popularly}}
 
 \question[Trắc nghiệm]{Sometimes it can be really \underline{\hspace{1.3cm}} to go hiking alone in the forest.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{endanger}\hfill \choiceitem{B}{danger}\hfill \choiceitem{C}{dangerous}\hfill \choiceitem{D}{dangerously}}
 
 \question[Trắc nghiệm]{In the past people believed that women’s \underline{\hspace{1.3cm}} roles were as mothers and wives.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{nature}\hfill \choiceitem{B}{natural}\hfill \choiceitem{C}{naturism}\hfill \choiceitem{D}{naturally}}
 
 \question[Trắc nghiệm]{Although David was \underline{\hspace{1.3cm}} after a day’s work in the office, he tried to help his wife with the household chores.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{exhaustion}\hfill \choiceitem{B}{exhausted}\hfill \choiceitem{C}{exhaust}\hfill \choiceitem{D}{exhaustively}}
 
 \question[Trắc nghiệm]{A \underline{\hspace{1.3cm}} party was prepared to welcome the honored guests.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{special}\hfill \choiceitem{B}{specialize}\hfill \choiceitem{C}{specially}\hfill \choiceitem{D}{specialist}}
 
 \question[Trắc nghiệm]{How many means of \underline{\hspace{1.3cm}} do you use on a regular basis?}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{communication}\hfill \choiceitem{B}{communicating}\hfill \choiceitem{C}{communicate}\hfill \choiceitem{D}{communicative}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{communication}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{communicating}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{communicate}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{communicative}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Janice made some useful \underline{\hspace{1.3cm}} for the class extra-curricular activities.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{suggest}\hfill \choiceitem{B}{suggested}\hfill \choiceitem{C}{suggestions}\hfill \choiceitem{D}{suggesting}}
 
 \question[Trắc nghiệm]{Jack put on his best suit to make a good \underline{\hspace{1.3cm}} on his future in-laws.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{impression}\hfill \choiceitem{B}{impressive}\hfill \choiceitem{C}{impressively}\hfill \choiceitem{D}{impress}}
 
 \question[Trắc nghiệm]{The more \underline{\hspace{1.3cm}} you look, the better impression you will make on your interviewer.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{confine}\hfill \choiceitem{B}{confident}\hfill \choiceitem{C}{confidently}\hfill \choiceitem{D}{confidence}}
 
 \question[Trắc nghiệm]{Josh’s ambition is to become a \underline{\hspace{1.3cm}} businessman like his father.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{success}\hfill \choiceitem{B}{succeed}\hfill \choiceitem{C}{successfully}\hfill \choiceitem{D}{successful}}
 
 \question[Trắc nghiệm]{Many twelfth graders find it hard to \underline{\hspace{1.3cm}} what university to apply to.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{decide}\hfill \choiceitem{B}{decision}\hfill \choiceitem{C}{decisive}\hfill \choiceitem{D}{decisively}}
 
 \question[Trắc nghiệm]{I think mobile phones are \underline{\hspace{1.3cm}} for people of all ages.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{usage}\hfill \choiceitem{B}{use}\hfill \choiceitem{C}{usefully}\hfill \choiceitem{D}{useful}}
 
 \question[Trắc nghiệm]{Such characters as fairies or witches in Walt Disney animated cartoons are purely \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{imaginary}\hfill \choiceitem{B}{imagination}\hfill \choiceitem{C}{imagine}\hfill \choiceitem{D}{imaginatively}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{imaginary}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{imagination}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{imagine}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{imaginatively}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The Covid-19 pandemic has taken a heavy toll on the country’s aviation \underline{\hspace{1.3cm}} due to international travel restrictions.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{industry}\hfill \choiceitem{B}{industrialize}\hfill \choiceitem{C}{industrious}\hfill \choiceitem{D}{industriously}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{industry}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{industrialize}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{industrious}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{industriously}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{According to most professors, mature students are ideal students because they are hard-working and become \underline{\hspace{1.3cm}} involved in all aspects of the learning process.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{active}\hfill \choiceitem{B}{action}\hfill \choiceitem{C}{act}\hfill \choiceitem{D}{actively}}
 
 \question[Trắc nghiệm]{Tom is getting ever keener on doing research on \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{biology}\hfill \choiceitem{B}{biological}\hfill \choiceitem{C}{biologist}\hfill \choiceitem{D}{biologically}}
 
 \question[Trắc nghiệm]{They are always \underline{\hspace{1.3cm}} of what their children do.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{support}\hfill \choiceitem{B}{supporting}\hfill \choiceitem{C}{supportive}\hfill \choiceitem{D}{supportively}}
 
 \question[Trắc nghiệm]{It is not always easy to make a good \underline{\hspace{1.3cm}} at the last minute.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{decide}\hfill \choiceitem{B}{decision}\hfill \choiceitem{C}{decisive}\hfill \choiceitem{D}{decisively}}
 
 \question[Trắc nghiệm]{Cultural \underline{\hspace{1.3cm}} can be found in such simple processes as giving or receiving a gift.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{differences}\hfill \choiceitem{B}{different}\hfill \choiceitem{C}{differently}\hfill \choiceitem{D}{differ}}
 
 \question[Trắc nghiệm]{Travelling to \underline{\hspace{1.3cm}} countries in the world enables me to learn many interesting things.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{differ}\hfill \choiceitem{B}{difference}\hfill \choiceitem{C}{differently}\hfill \choiceitem{D}{different}}
 
 \question[Trắc nghiệm]{The job market is constantly changing due to innovative technology and new \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{competition}\hfill \choiceitem{B}{competitively}\hfill \choiceitem{C}{competitive}\hfill \choiceitem{D}{compete}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{competition}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{competitively}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{competitive}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{compete}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{In Vietnam, children begin their primary \underline{\hspace{1.3cm}} at the age of six.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{educational}\hfill \choiceitem{B}{educationally}\hfill \choiceitem{C}{educate}\hfill \choiceitem{D}{education}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{educational}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{educationally}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{educate}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{education}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Many librarians and teachers are now accepting graphic novels as proper literature for children as they \underline{\hspace{1.3cm}} young people and motivate them to read.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{attract}\hfill \choiceitem{B}{attractively}\hfill \choiceitem{C}{attraction}\hfill \choiceitem{D}{attractive}}
 
 \question[Trắc nghiệm]{The success of the company in such a \underline{\hspace{1.3cm}} market is remarkable.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{compete}\hfill \choiceitem{B}{competitively}\hfill \choiceitem{C}{competitive}\hfill \choiceitem{D}{competition}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{compete}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{competitively}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{competitive}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{competition}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{People tend to be unaware of the messages they are sending to others. So, it is \underline{\hspace{1.3cm}} to consider your own body language before dealing with people from other cultures.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{usefully}\hfill \choiceitem{B}{use}\hfill \choiceitem{C}{usefulness}\hfill \choiceitem{D}{useful}}
 
 \question[Trắc nghiệm]{Project-based learning provides wonderful opportunities for students to develop their \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{creative}\hfill \choiceitem{B}{creativity}\hfill \choiceitem{C}{create}\hfill \choiceitem{D}{creatively}}
 
 \question[Trắc nghiệm]{Candidates are advised to dress formally to make a good \underline{\hspace{1.3cm}} on job interviewers.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{impress}\hfill \choiceitem{B}{impressively}\hfill \choiceitem{C}{impression}\hfill \choiceitem{D}{impressive}}
 
 \question[Trắc nghiệm]{It is believed that travelling is a good way to expand our \underline{\hspace{1.3cm}} of the world.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{knowledgeable}\hfill \choiceitem{B}{knowledgeably}\hfill \choiceitem{C}{knowledge}\hfill \choiceitem{D}{know}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{knowledgeable}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{knowledgeably}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{knowledge}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{know}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Susan has achieved great \underline{\hspace{1.3cm}} in her career thanks to her hard work.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{success}\hfill \choiceitem{B}{succeed}\hfill \choiceitem{C}{successful}\hfill \choiceitem{D}{successfully}}
 
 \question[Trắc nghiệm]{Participating in teamwork activities helps students develop their \underline{\hspace{1.3cm}} skills.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{social}\hfill \choiceitem{B}{society}\hfill \choiceitem{C}{socially}\hfill \choiceitem{D}{socialize}}
 
 \question[Trắc nghiệm]{You should turn off the lights before going out to save \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{electricity}\hfill \choiceitem{B}{electrify}\hfill \choiceitem{C}{electric}\hfill \choiceitem{D}{electrically}}
 
 \question[Trắc nghiệm]{The study also found that social networks allow us to have discussions with a much more diverse set of people than in the real world, so we share knowledge with people from a wide \underline{\hspace{1.3cm}} of backgrounds.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{vary}\hfill \choiceitem{B}{variety}\hfill \choiceitem{C}{various}\hfill \choiceitem{D}{variously}}
 
 \question[Trắc nghiệm]{Laura came to \underline{\hspace{1.3cm}} me for taking care of her dog when she was away.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{thank}\hfill \choiceitem{B}{thankful}\hfill \choiceitem{C}{thankfulness}\hfill \choiceitem{D}{thankful}}
 
 \question[Trắc nghiệm]{The candidate took a \underline{\hspace{1.3cm}} breath before he walked into the interview room.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{deeply}\hfill \choiceitem{B}{deep}\hfill \choiceitem{C}{deepen}\hfill \choiceitem{D}{depth}}
 
 \question[Trắc nghiệm]{With his good sense of humor, Martin is quite \underline{\hspace{1.3cm}} with the students.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{popularly}\hfill \choiceitem{B}{popular}\hfill \choiceitem{C}{popularize}\hfill \choiceitem{D}{popularity}}
 
 \setcounter{qcounter}{0}
 \begin{groupbox}\textbf{\large Nhóm câu hỏi về Thì (Chuyên đề bổ trợ - Phụ lục 3)}\end{groupbox}
 \question[Trắc nghiệm]{Thanh \underline{\hspace{1.3cm}} tea when his sister came home from school.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{makes}\hfill \choiceitem{B}{was making}\hfill \choiceitem{C}{is making}\hfill \choiceitem{D}{has made}}
 
 \question[Trắc nghiệm]{I will pick you up \underline{\hspace{1.3cm}} at the station.}
 
-\vspace{6pt}
-\choiceitem{A}{until you will arrive}
-
-\vspace{3pt}
-
-\choiceitem{B}{when you arrive}
-
-\vspace{3pt}
-
-\choiceitem{C}{as soon as you arrived}
-
-\vspace{3pt}
-
-\choiceitem{D}{after you had arrived}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{until you will arrive}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{when you arrive}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{as soon as you arrived}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{after you had arrived}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Lucy found an interesting article when she \underline{\hspace{1.3cm}} the Net.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{had surfed}\hfill \choiceitem{B}{is surfing}\hfill \choiceitem{C}{will surf}\hfill \choiceitem{D}{was surfing}}
 
 \question[Trắc nghiệm]{Maria has made friends with some foreigners since she \underline{\hspace{1.3cm}} to Florida.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{moved}\hfill \choiceitem{B}{moves}\hfill \choiceitem{C}{was moving}\hfill \choiceitem{D}{is moving}}
 
 \question[Trắc nghiệm]{The teacher entered the room while the students \underline{\hspace{1.3cm}} their plan for the excursion.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{discuss}\hfill \choiceitem{B}{were discussing}\hfill \choiceitem{C}{discussed}\hfill \choiceitem{D}{have discussed}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{discuss}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{were discussing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{discussed}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{have discussed}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Linda took great photos of butterflies while she \underline{\hspace{1.3cm}} in the forest.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is hiking}\hfill \choiceitem{B}{was hiking}\hfill \choiceitem{C}{hiked}\hfill \choiceitem{D}{had hiked}}
 
 \question[Trắc nghiệm]{My father \underline{\hspace{1.3cm}} for the company for 30 years before he retired}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is working}\hfill \choiceitem{B}{has worked}\hfill \choiceitem{C}{had worked}\hfill \choiceitem{D}{works}}
 
 \question[Trắc nghiệm]{By the time the police arrived, the thieves \underline{\hspace{1.3cm}} away.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{ran}\hfill \choiceitem{B}{have run}\hfill \choiceitem{C}{are running}\hfill \choiceitem{D}{had run}}
 
 \question[Trắc nghiệm]{I \underline{\hspace{1.3cm}} my homework when the lights went out.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{did}\hfill \choiceitem{B}{am doing}\hfill \choiceitem{C}{was doing}\hfill \choiceitem{D}{have done}}
 
 \question[Trắc nghiệm]{We \underline{\hspace{1.3cm}} each other since we were at high school.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{know}\hfill \choiceitem{B}{have known}\hfill \choiceitem{C}{knew}\hfill \choiceitem{D}{are knowing}}
 
 \question[Trắc nghiệm]{As soon as I \underline{\hspace{1.3cm}} the report, I will send it to you.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{finish}\hfill \choiceitem{B}{finished}\hfill \choiceitem{C}{will finish}\hfill \choiceitem{D}{had finished}}
 
 \question[Trắc nghiệm]{My sister \underline{\hspace{1.3cm}} her degree by the end of next year.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{will get}\hfill \choiceitem{B}{gets}\hfill \choiceitem{C}{will have got}\hfill \choiceitem{D}{has got}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{will get}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{gets}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{will have got}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{has got}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{When I \underline{\hspace{1.3cm}} to the party, everyone had already left.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{come}\hfill \choiceitem{B}{came}\hfill \choiceitem{C}{was coming}\hfill \choiceitem{D}{have come}}
 
 \question[Trắc nghiệm]{By the time you finish cooking they \underline{\hspace{1.3cm}} their homework.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{will have finished}\hfill \choiceitem{B}{will finish}\hfill \choiceitem{C}{had finished}\hfill \choiceitem{D}{have finished}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{will have finished}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{will finish}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{had finished}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{have finished}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{"You have just missed the last train.” - "Never minD. I \underline{\hspace{1.3cm}} ”}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{will be walking}\hfill \choiceitem{B}{am going to walk}\hfill \choiceitem{C}{will walk}\hfill \choiceitem{D}{am walking}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{will be walking}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{am going to walk}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{will walk}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{am walking}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{"I \underline{\hspace{1.3cm}} the way to the Globe Theater.” - "OK. I \underline{\hspace{1.3cm}} you.”}
 
-\vspace{6pt}
-\choiceitem{A}{don't know; will show}
-
-\vspace{3pt}
-
-\choiceitem{B}{won't know; will show}
-
-\vspace{3pt}
-
-\choiceitem{C}{don't know; am showing}
-
-\vspace{3pt}
-
-\choiceitem{D}{don't know; am going to show}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{don't know; will show}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{won't know; will show}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{don't know; am showing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{don't know; am going to show}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Come in, please. I \underline{\hspace{1.3cm}} for you long.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{have waited}\hfill \choiceitem{B}{have been waiting}\hfill \choiceitem{C}{had been waiting}\hfill \choiceitem{D}{have been waited}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{have waited}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{have been waiting}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{had been waiting}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{have been waited}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Who you \underline{\hspace{1.3cm}} to the cinema with last night?}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{went}\hfill \choiceitem{B}{did you go}\hfill \choiceitem{C}{had gone}\hfill \choiceitem{D}{did you went}}
 
 \question[Trắc nghiệm]{Detective: I'm afraid I must ask both of you. What \underline{\hspace{1.3cm}} at 10.20 p.m yesterday? Mr. X: I \underline{\hspace{1.3cm}} chess with my wife. Mr. Y: I \underline{\hspace{1.3cm}} to a play on the radio.}
 
-\vspace{6pt}
-\choiceitem{A}{were you doing; am playing; was listening}
-
-\vspace{3pt}
-
-\choiceitem{B}{did you do; played; listened}
-
-\vspace{3pt}
-
-\choiceitem{C}{were you doing; am playing; am listening}
-
-\vspace{3pt}
-
-\choiceitem{D}{were you doing; was playing; was listening}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{were you doing; am playing; was listening}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{did you do; played; listened}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{were you doing; am playing; am listening}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{were you doing; was playing; was listening}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{You \underline{\hspace{1.3cm}} my sister for a long time \underline{\hspace{1.3cm}} come to see us tonight?}
 
-\vspace{6pt}
-\choiceitem{A}{haven’t seen; Will you}
-
-\vspace{3pt}
-
-\choiceitem{B}{won't see; Will you}
-
-\vspace{3pt}
-
-\choiceitem{C}{hadn't seen; Would you}
-
-\vspace{3pt}
-
-\choiceitem{D}{haven’t seen; Are you going}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{haven’t seen; Will you}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{won't see; Will you}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{hadn't seen; Would you}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{haven’t seen; Are you going}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{By the time the rescue team finally arrived, the lost hikers \underline{\hspace{1.3cm}} for over ten hours in the freezing cold.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{were walking}\hfill \choiceitem{B}{have been walking}\hfill \choiceitem{C}{would walk}\hfill \choiceitem{D}{had been walking}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{were walking}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{have been walking}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{would walk}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{had been walking}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{"Why are your hands so dirty?" – "I \underline{\hspace{1.3cm}} my car engine. It’s finally running smoothly now."}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{repaired}\hfill \choiceitem{B}{have been repairing}\hfill \choiceitem{C}{had been repairing}\hfill \choiceitem{D}{repair}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{repaired}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{have been repairing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{had been repairing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{repair}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{When I started my new job, I didn't like working nights, but now, a few months later, I (1) \underline{\hspace{1.3cm}} the unusual hours, and I (2) \underline{\hspace{1.3cm}} go to bed at 10 p.m.}
 
-\vspace{6pt}
-\choiceitem{A}{(1) am getting used to; (2) don't use to}
-
-\vspace{3pt}
-
-\choiceitem{B}{(1) have gotten used to; (2) didn't use to}
-
-\vspace{3pt}
-
-\choiceitem{C}{(1) have gotten used to; (2) am not used to}
-
-\vspace{3pt}
-
-\choiceitem{D}{(1) am used to; (2) didn't use to}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{(1) am getting used to; (2) don't use to}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{(1) have gotten used to; (2) didn't use to}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{(1) have gotten used to; (2) am not used to}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{(1) am used to; (2) didn't use to}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I think this experience \underline{\hspace{1.3cm}} teach us more than any book ever could.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{must}\hfill \choiceitem{B}{is going to}\hfill \choiceitem{C}{will}\hfill \choiceitem{D}{would}}
 
 \question[Trắc nghiệm]{By the end of this academic year, Professor Sharma \underline{\hspace{1.3cm}} at this prestigious university for precisely twenty-five years.}
 
-\vspace{6pt}
-\choiceitem{A}{will be teaching}
-
-\vspace{3pt}
-
-\choiceitem{B}{will have taught}
-
-\vspace{3pt}
-
-\choiceitem{C}{will have been teaching}
-
-\vspace{3pt}
-
-\choiceitem{D}{will teach}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{will be teaching}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{will have taught}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{will have been teaching}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{will teach}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{"Why are your hands so dirty?" – "I \underline{\hspace{1.3cm}} my car engine. It’s finally running smoothly now."}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{repaired}\hfill \choiceitem{B}{have been repairing}\hfill \choiceitem{C}{had been repairing}\hfill \choiceitem{D}{repair}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{repaired}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{have been repairing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{had been repairing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{repair}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Three-quarters of the information in that document \underline{\hspace{1.3cm}} outdated and needs to be revised.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{are}\hfill \choiceitem{B}{is}\hfill \choiceitem{C}{was}\hfill \choiceitem{D}{were}}
 
 \question[Trắc nghiệm]{The manager demanded that the report \underline{\hspace{1.3cm}} on his desk by 9 a.m. tomorrow.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{be}\hfill \choiceitem{B}{is going to be}\hfill \choiceitem{C}{will have been}\hfill \choiceitem{D}{will be}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{be}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{is going to be}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{will have been}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{will be}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The mechanics \underline{\hspace{1.3cm}} the car engine for three hours before they finally identified the root cause of the problem.}
 
-\vspace{6pt}
-\choiceitem{A}{have been repairing}
-
-\vspace{3pt}
-
-\choiceitem{B}{had been repairing}
-
-\vspace{3pt}
-
-\choiceitem{C}{will be repairing}
-
-\vspace{3pt}
-
-\choiceitem{D}{were repairing}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{have been repairing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{had been repairing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{will be repairing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{were repairing}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{By the time the new food delivery app is officially launched next quarter, our UI/UX design team \underline{\hspace{1.3cm}} on its interface for over eight months.}
 
-\vspace{6pt}
-\choiceitem{A}{will be working}
-
-\vspace{3pt}
-
-\choiceitem{B}{have been working}
-
-\vspace{3pt}
-
-\choiceitem{C}{will have been working}
-
-\vspace{3pt}
-
-\choiceitem{D}{are going to work}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{will be working}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{have been working}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{will have been working}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{are going to work}\par\vspace{4pt}
 
 \setcounter{qcounter}{0}
 \begin{groupbox}\textbf{\large Nhóm câu hỏi về Lượng từ - Mạo từ - Sự hoà hợp chủ ngữ và động từ (Chuyên đề bổ trợ phụ lục 4)}\end{groupbox}
 \question[Trắc nghiệm]{A small \underline{\hspace{1.3cm}} of children are educated at home.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{deal}\hfill \choiceitem{B}{amount}\hfill \choiceitem{C}{many}\hfill \choiceitem{D}{number}}
 
 \question[Trắc nghiệm]{I suppose you mix with \underline{\hspace{1.3cm}} people in your job.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{a wide variety of}\hfill \choiceitem{B}{a small amount of}\hfill \choiceitem{C}{a great deal of}\hfill \choiceitem{D}{a half of}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{a wide variety of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{a small amount of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{a great deal of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{a half of}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} of people approve of the death sentence.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{A great deal}\hfill \choiceitem{B}{A large majority}\hfill \choiceitem{C}{An amount}\hfill \choiceitem{D}{The number of}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{A great deal}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{A large majority}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{An amount}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{The number of}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Oil is a very important substance because it has \underline{\hspace{1.3cm}} industrial uses.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{a small amount of}\hfill \choiceitem{B}{a wide range of}\hfill \choiceitem{C}{a minority of}\hfill \choiceitem{D}{a great deal of}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{a small amount of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{a wide range of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{a minority of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{a great deal of}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} effort has gone into making the software reliable.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{Many}\hfill \choiceitem{B}{A great many}\hfill \choiceitem{C}{A wide range of}\hfill \choiceitem{D}{A great deal of}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{Many}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{A great many}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{A wide range of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{A great deal of}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{You have \underline{\hspace{1.3cm}} freedom to explore new techniques.}
 
-\vspace{6pt}
-\choiceitem{A}{a wide range of}
-
-\vspace{3pt}
-
-\choiceitem{B}{a large number of}
-
-\vspace{3pt}
-
-\choiceitem{C}{a certain amount of}
-
-\vspace{3pt}
-
-\choiceitem{D}{a great deal}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{a wide range of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{a large number of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{a certain amount of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{a great deal}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{You’ve met Linda, but I have \underline{\hspace{1.3cm}} sister who you haven’t met, called Margaret.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{another}\hfill \choiceitem{B}{other}\hfill \choiceitem{C}{others}\hfill \choiceitem{D}{the other}}
 
 \question[Trắc nghiệm]{Do you want to exchange this book for \underline{\hspace{1.3cm}} or do you want your money back?}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{another}\hfill \choiceitem{B}{other}\hfill \choiceitem{C}{others}\hfill \choiceitem{D}{the other}}
 
 \question[Trắc nghiệm]{For \underline{\hspace{1.3cm}} £50 you can buy the model with a touchscreen.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{other}\hfill \choiceitem{B}{another}\hfill \choiceitem{C}{others}\hfill \choiceitem{D}{the other}}
 
 \question[Trắc nghiệm]{She's finished with that boyfriend and found herself \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{other one}\hfill \choiceitem{B}{the other one}\hfill \choiceitem{C}{another one}\hfill \choiceitem{D}{the others one}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{other one}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{the other one}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{another one}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{the others one}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The plan has been opposed by schools and \underline{\hspace{1.3cm}} local organizations.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{another}\hfill \choiceitem{B}{the other}\hfill \choiceitem{C}{other}\hfill \choiceitem{D}{others}}
 
 \question[Trắc nghiệm]{There is no \underline{\hspace{1.3cm}} work available at the moment.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{another}\hfill \choiceitem{B}{the other}\hfill \choiceitem{C}{other}\hfill \choiceitem{D}{others}}
 
 \question[Trắc nghiệm]{We don’t need those books, we need \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{other ones}\hfill \choiceitem{B}{another one}\hfill \choiceitem{C}{the others one}\hfill \choiceitem{D}{the other ones}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{other ones}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{another one}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{the others one}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{the other ones}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Some people prefer a vegetarian diet, while \underline{\hspace{1.3cm}} prefer a meat-based diet.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{another}\hfill \choiceitem{B}{other}\hfill \choiceitem{C}{others}\hfill \choiceitem{D}{the other}}
 
 \question[Trắc nghiệm]{I don’t like these postcards. Let’s ask for \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{another}\hfill \choiceitem{B}{other}\hfill \choiceitem{C}{others}\hfill \choiceitem{D}{the other}}
 
 \question[Trắc nghiệm]{She has two hats, one is black and \underline{\hspace{1.3cm}} is white.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{the other}\hfill \choiceitem{B}{the others}\hfill \choiceitem{C}{other}\hfill \choiceitem{D}{others}}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} the students in this school are intelligent and learned.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{Most}\hfill \choiceitem{B}{Most of}\hfill \choiceitem{C}{Mostly}\hfill \choiceitem{D}{Nearly}}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} children like playing and hate being given more homework.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{Most}\hfill \choiceitem{B}{Most of}\hfill \choiceitem{C}{Mostly}\hfill \choiceitem{D}{Nearly}}
 
 \question[Trắc nghiệm]{After leaving school, she spent a year traveling, \underline{\hspace{1.3cm}} in Africa and Asia.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{mostly}\hfill \choiceitem{B}{the most}\hfill \choiceitem{C}{most of}\hfill \choiceitem{D}{entire}}
 
 \question[Trắc nghiệm]{I am looking for \underline{\hspace{1.3cm}} place to spend \underline{\hspace{1.3cm}} night.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{the/ the}\hfill \choiceitem{B}{a/ the}\hfill \choiceitem{C}{a/ a}\hfill \choiceitem{D}{the/a}}
 
 \question[Trắc nghiệm]{Please turn off \underline{\hspace{1.3cm}} lights when you leave \underline{\hspace{1.3cm}} rooms, Venn}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{the/ the}\hfill \choiceitem{B}{a/ a}\hfill \choiceitem{C}{the/ a}\hfill \choiceitem{D}{a/the}}
 
 \question[Trắc nghiệm]{We are looking for a new candidates with \underline{\hspace{1.3cm}} long experience.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{the}\hfill \choiceitem{B}{a}\hfill \choiceitem{C}{an}\hfill \choiceitem{D}{$\varnothing$}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{the}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{a}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{an}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{$\varnothing$}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Would you pass me \underline{\hspace{1.3cm}} salt,please?}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{a}\hfill \choiceitem{B}{the}\hfill \choiceitem{C}{an}\hfill \choiceitem{D}{$\varnothing$}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{a}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{the}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{an}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{$\varnothing$}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Can you show me \underline{\hspace{1.3cm}} way to nearest station?}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{the/ the}\hfill \choiceitem{B}{a/ a}\hfill \choiceitem{C}{the/ a}\hfill \choiceitem{D}{a/the}}
 
 \question[Trắc nghiệm]{We have just read \underline{\hspace{1.3cm}} interesting book in the national library.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{a}\hfill \choiceitem{B}{an}\hfill \choiceitem{C}{the}\hfill \choiceitem{D}{$\varnothing$}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{a}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{an}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{the}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{$\varnothing$}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{You’ll get \underline{\hspace{1.3cm}} shock if you touch that wire.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{the}\hfill \choiceitem{B}{Ø}\hfill \choiceitem{C}{a}\hfill \choiceitem{D}{an}}
 
 \question[Trắc nghiệm]{Mr. Smith is \underline{\hspace{1.3cm}} clever lawyer and \underline{\hspace{1.3cm}} honest man.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{an/the}\hfill \choiceitem{B}{the/an}\hfill \choiceitem{C}{an/an}\hfill \choiceitem{D}{the/the}}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} youngest boy of Smiths has just started going to \underline{\hspace{1.3cm}} school.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{A/ Ø}\hfill \choiceitem{B}{Ø/the}\hfill \choiceitem{C}{an/ Ø}\hfill \choiceitem{D}{The/ Ø}}
 
 \question[Trắc nghiệm]{“Do you go to \underline{\hspace{1.3cm}} prison to visit him?”, asked the young woman.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{the}\hfill \choiceitem{B}{a}\hfill \choiceitem{C}{Ø}\hfill \choiceitem{D}{an}}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} eldest boy was at \underline{\hspace{1.3cm}} college.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{A/ the}\hfill \choiceitem{B}{The/ Ø}\hfill \choiceitem{C}{Ø/a}\hfill \choiceitem{D}{An/ Ø}}
 
 \question[Trắc nghiệm]{I have a cat and a dog. dog sometimes bites \underline{\hspace{1.3cm}} cat.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{A/a}\hfill \choiceitem{B}{A/the}\hfill \choiceitem{C}{The/ the}\hfill \choiceitem{D}{The/a}}
 
 \question[Trắc nghiệm]{Would you like to hear \underline{\hspace{1.3cm}} story story \underline{\hspace{1.3cm}} English scientist?}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{an/ the}\hfill \choiceitem{B}{the/ the}\hfill \choiceitem{C}{The/ the}\hfill \choiceitem{D}{The/a}}
 
 \question[Trắc nghiệm]{There’ll always be a conflict between \underline{\hspace{1.3cm}} old and \underline{\hspace{1.3cm}} young in a family.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{the/ the}\hfill \choiceitem{B}{an/ a}\hfill \choiceitem{C}{an/ the}\hfill \choiceitem{D}{the/a}}
 
 \question[Trắc nghiệm]{There was \underline{\hspace{1.3cm}} Collision at \underline{\hspace{1.3cm}} corner yesterday.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{the/a}\hfill \choiceitem{B}{an/the}\hfill \choiceitem{C}{a/ the}\hfill \choiceitem{D}{the/the}}
 
 \question[Trắc nghiệm]{Phoebe always said that this was \underline{\hspace{1.3cm}} expensive shop.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{the}\hfill \choiceitem{B}{an}\hfill \choiceitem{C}{a}\hfill \choiceitem{D}{$\varnothing$}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{the}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{an}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{a}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{$\varnothing$}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Like her two sisters, Clara loves \underline{\hspace{1.3cm}} crowded parties and \underline{\hspace{1.3cm}} nice gifts.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{the/a}\hfill \choiceitem{B}{a/the}\hfill \choiceitem{C}{a/ a}\hfill \choiceitem{D}{$\varnothing$ /$\varnothing$}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{the/a}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{a/the}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{a/ a}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{$\varnothing$ /$\varnothing$}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{We work 44 hours \underline{\hspace{1.3cm}} months.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{a}\hfill \choiceitem{B}{the}\hfill \choiceitem{C}{an}\hfill \choiceitem{D}{x}}
 
 \question[Trắc nghiệm]{Our parents went to work in \underline{\hspace{1.3cm}} morning.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{a}\hfill \choiceitem{B}{$\varnothing$}\hfill \choiceitem{C}{the}\hfill \choiceitem{D}{an}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{a}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{$\varnothing$}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{the}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{an}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Roger is on night duty. When we go to \underline{\hspace{1.3cm}} bed, he goes to \underline{\hspace{1.3cm}} work.}
 
-\vspace{6pt}
-\choiceitem{A}{a/ $\varnothing$}
-
-\vspace{3pt}
-
-\choiceitem{B}{a/ the}
-
-\vspace{3pt}
-
-\choiceitem{C}{the/ $\varnothing$}
-
-\vspace{3pt}
-
-\choiceitem{D}{$\varnothing$/ $\varnothing$}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{a/ $\varnothing$}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{a/ the}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{the/ $\varnothing$}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{$\varnothing$/ $\varnothing$}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The office …………on the weekend.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{close}\hfill \choiceitem{B}{closes}\hfill \choiceitem{C}{is closed}\hfill \choiceitem{D}{are closed}}
 
 \question[Trắc nghiệm]{The keys of the house ……….lost.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{have}\hfill \choiceitem{B}{has}\hfill \choiceitem{C}{have been}\hfill \choiceitem{D}{has been}}
 
 \question[Trắc nghiệm]{Ten miles ………. a very long distance for us to walk.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{be}\hfill \choiceitem{D}{am}}
 
 \question[Trắc nghiệm]{The books borrowed from the library ……… on my desk.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{is being}\hfill \choiceitem{D}{are being}}
 
 \question[Trắc nghiệm]{The boy who won the two medals ………. a friend of mine.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{be}\hfill \choiceitem{D}{being}}
 
 \question[Trắc nghiệm]{Three fifths of the land in this area .......... used for community purposes.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{have}\hfill \choiceitem{D}{has}}
 
 \question[Trắc nghiệm]{The pilot along with his passengers … rescued last night.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{am}\hfill \choiceitem{B}{have been}\hfill \choiceitem{C}{was}\hfill \choiceitem{D}{is}}
 
 \question[Trắc nghiệm]{Where ……………. your family live?}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{do}\hfill \choiceitem{D}{does}}
 
 \question[Trắc nghiệm]{The trousers you bought for me ………….. me.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{doesn’t fit}\hfill \choiceitem{B}{don’t fit}\hfill \choiceitem{C}{isn’t fit}\hfill \choiceitem{D}{aren’t fit}}
 
 \question[Trắc nghiệm]{Either you or I ........... able to do that job.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{am}\hfill \choiceitem{B}{is}\hfill \choiceitem{C}{are}\hfill \choiceitem{D}{be}}
 
 \question[Trắc nghiệm]{Each of you………a share in the work.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{to have}\hfill \choiceitem{B}{have}\hfill \choiceitem{C}{having}\hfill \choiceitem{D}{has}}
 
 \question[Trắc nghiệm]{There are small……………………….between British and American English.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{differences}\hfill \choiceitem{B}{difference}\hfill \choiceitem{C}{differently}\hfill \choiceitem{D}{different}}
 
 \question[Trắc nghiệm]{The quality of these recordings \underline{\hspace{1.3cm}} not very good.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{be}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{am}\hfill \choiceitem{D}{is}}
 
 \question[Trắc nghiệm]{The number of students in this class …………. limited to thirty.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{be}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{is}\hfill \choiceitem{D}{am}}
 
 \question[Trắc nghiệm]{Not only the air but also the oceans ........... been polluted seriously.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{have}\hfill \choiceitem{B}{has}\hfill \choiceitem{C}{is having}\hfill \choiceitem{D}{are having}}
 
 \question[Trắc nghiệm]{Working in the factory ........... not what children should do}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{be}\hfill \choiceitem{B}{is}\hfill \choiceitem{C}{are}\hfill \choiceitem{D}{have been}}
 
 \question[Trắc nghiệm]{A large number of students in this school………. . English quite fluently}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{speaks}\hfill \choiceitem{B}{is speaking}\hfill \choiceitem{C}{has spoken}\hfill \choiceitem{D}{speak}}
 
 \question[Trắc nghiệm]{Bread and butter ………. what she asks for}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{will be}\hfill \choiceitem{D}{have been}}
 
 \question[Trắc nghiệm]{Either John or his wife ………breakfast each morning.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{make}\hfill \choiceitem{B}{is making}\hfill \choiceitem{C}{makes}\hfill \choiceitem{D}{made}}
 
 \question[Trắc nghiệm]{Some of the milk I bought last night ........... not fresh anymore.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{is being}\hfill \choiceitem{C}{are}\hfill \choiceitem{D}{are}}
 
 \question[Trắc nghiệm]{The use of credit cards in place of cash \underline{\hspace{1.3cm}} increased rapidly in recent years.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{to have}\hfill \choiceitem{B}{have}\hfill \choiceitem{C}{has}\hfill \choiceitem{D}{having}}
 
 \question[Trắc nghiệm]{Neither of the answers ……………….. correct.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{are}\hfill \choiceitem{B}{is}\hfill \choiceitem{C}{be}\hfill \choiceitem{D}{have been}}
 
 \question[Trắc nghiệm]{The weather in the southern states ………….. very hot during the summer.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{get}\hfill \choiceitem{B}{have got}\hfill \choiceitem{C}{is got}\hfill \choiceitem{D}{gets}}
 
 \question[Trắc nghiệm]{Each of the residents in this community ........... responsible for keeping this park clean.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{am}\hfill \choiceitem{C}{are}\hfill \choiceitem{D}{were}}
 
 \question[Trắc nghiệm]{Anything \underline{\hspace{1.3cm}} better than going to the movies tonight.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{am}\hfill \choiceitem{D}{were}}
 
 \question[Trắc nghiệm]{What time \underline{\hspace{1.3cm}} the news on TV?}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{am}\hfill \choiceitem{C}{are}\hfill \choiceitem{D}{were}}
 
 \question[Trắc nghiệm]{The effects of cigarette smoking \underline{\hspace{1.3cm}} been proven to extremely harmful.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{have}\hfill \choiceitem{B}{has}\hfill \choiceitem{C}{to have}\hfill \choiceitem{D}{having}}
 
 \question[Trắc nghiệm]{Advertisements on TV \underline{\hspace{1.3cm}} becoming more competitive than ever before.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{was}\hfill \choiceitem{D}{was}}
 
 \question[Trắc nghiệm]{One of the countries I would like to visit ……….Italy}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{be}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{am}\hfill \choiceitem{D}{is}}
 
 \question[Trắc nghiệm]{A pair of jeans \underline{\hspace{1.3cm}} in the washing machine this morning.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{is}\hfill \choiceitem{B}{are}\hfill \choiceitem{C}{have been}\hfill \choiceitem{D}{were}}
 
 \setcounter{qcounter}{0}
 \begin{groupbox}\textbf{\large Nhóm câu hỏi về Câu điều kiện (Chuyên đề bổ trợ phụ lục 5)}\end{groupbox}
 \question[Trắc nghiệm]{George wouldn't have met Mary \underline{\hspace{1.3cm}} to his brother's graduation party.}
 
-\vspace{6pt}
-\choiceitem{A}{if he has not gone}
-
-\vspace{3pt}
-
-\choiceitem{B}{had not he gone}
-
-\vspace{3pt}
-
-\choiceitem{C}{had he not gone}
-
-\vspace{3pt}
-
-\choiceitem{D}{if he shouldn't have gone}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{if he has not gone}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{had not he gone}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{had he not gone}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{if he shouldn't have gone}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} ten minutes earlier, you would have got a better seat.}
 
-\vspace{6pt}
-\choiceitem{A}{Were you arrived}
-
-\vspace{3pt}
-
-\choiceitem{B}{If you arrived}
-
-\vspace{3pt}
-
-\choiceitem{C}{If you hadn't arrived}
-
-\vspace{3pt}
-
-\choiceitem{D}{Had you arrived}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{Were you arrived}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{If you arrived}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{If you hadn't arrived}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Had you arrived}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{If she \underline{\hspace{1.3cm}} a car, she would go out in the evening.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{have}\hfill \choiceitem{B}{has}\hfill \choiceitem{C}{has had}\hfill \choiceitem{D}{had}}
 
 \question[Trắc nghiệm]{Without your help, I \underline{\hspace{1.3cm}} the technical problem with my computer the other day.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{can't solve}\hfill \choiceitem{B}{couldn't have solved}\hfill \choiceitem{C}{Couldn't solve}\hfill \choiceitem{D}{Weren't solved}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{can't solve}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{couldn't have solved}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{Couldn't solve}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Weren't solved}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The joke would not be funny if it \underline{\hspace{1.3cm}} into French.}
 
-\vspace{6pt}
-\choiceitem{A}{has been translated}
-
-\vspace{3pt}
-
-\choiceitem{B}{be translated}
-
-\vspace{3pt}
-
-\choiceitem{C}{was be translated}
-
-\vspace{3pt}
-
-\choiceitem{D}{were translated}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{has been translated}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{be translated}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{was be translated}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{were translated}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{We \underline{\hspace{1.3cm}} on the beach now if we hadn't missed the plane}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{might have lain}\hfill \choiceitem{B}{would lie}\hfill \choiceitem{C}{could be lying}\hfill \choiceitem{D}{would have lain}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{might have lain}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{would lie}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{could be lying}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{would have lain}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I think you should stop smoking.}
 
-\vspace{6pt}
-\choiceitem{A}{If I am you, I will stop smoking.}
-
-\vspace{3pt}
-
-\choiceitem{B}{If I had been you, I would stop smoking,}
-
-\vspace{3pt}
-
-\choiceitem{C}{If I were you, I would stop smoking.}
-
-\vspace{3pt}
-
-\choiceitem{D}{If I were you, I will stop smoking.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{If I am you, I will stop smoking.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{If I had been you, I would stop smoking,}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{If I were you, I would stop smoking.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{If I were you, I will stop smoking.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{If he had been more careful, he \underline{\hspace{1.3cm}}}
 
-\vspace{6pt}
-\choiceitem{A}{won't fall}
-
-\vspace{3pt}
-
-\choiceitem{B}{wouldn't fall}
-
-\vspace{3pt}
-
-\choiceitem{C}{wouldn't have fallen}
-
-\vspace{3pt}
-
-\choiceitem{D}{would haven't fallen}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{won't fall}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{wouldn't fall}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{wouldn't have fallen}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{would haven't fallen}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{His health would be improved \underline{\hspace{1.3cm}}}
 
-\vspace{6pt}
-\choiceitem{A}{if he continued to smoke heavily}
-
-\vspace{3pt}
-
-\choiceitem{B}{unless he stopped smoking heavily}
-
-\vspace{3pt}
-
-\choiceitem{C}{if he gave up smoking}
-
-\vspace{3pt}
-
-\choiceitem{D}{if only he doesn't smoke any more.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{if he continued to smoke heavily}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{unless he stopped smoking heavily}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{if he gave up smoking}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{if only he doesn't smoke any more.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{He was driving very fast because he didn't know the road was icy.}
 
-\vspace{6pt}
-\choiceitem{A}{If he knew the road was icy, he wouldn't drive so fast.}
-
-\vspace{3pt}
-
-\choiceitem{B}{He hadn't been driving very fast if he would have known the road was icy.}
-
-\vspace{3pt}
-
-\choiceitem{C}{If he had known the road was icy, he wouldn't have been driving so fast.}
-
-\vspace{3pt}
-
-\choiceitem{D}{He wasn't driving very fast if he would know the road was icy.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{If he knew the road was icy, he wouldn't drive so fast.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{He hadn't been driving very fast if he would have known the road was icy.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{If he had known the road was icy, he wouldn't have been driving so fast.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{He wasn't driving very fast if he would know the road was icy.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I didn’t know that you were at home. I didn't visit you.}
 
-\vspace{6pt}
-\choiceitem{A}{If I knew that you were at home, I would visit you.}
-
-\vspace{3pt}
-
-\choiceitem{B}{If I had known that you were at home, I would have visited you.}
-
-\vspace{3pt}
-
-\choiceitem{C}{If I knew that you had been at home, I would have visited you.}
-
-\vspace{3pt}
-
-\choiceitem{D}{If I would know that you were at home, I visited you.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{If I knew that you were at home, I would visit you.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{If I had known that you were at home, I would have visited you.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{If I knew that you had been at home, I would have visited you.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{If I would know that you were at home, I visited you.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{If Nam had passed the GCSE examination, he \underline{\hspace{1.3cm}} to take the entrance examination to the university.}
 
-\vspace{6pt}
-\choiceitem{A}{would have been allowed}
-
-\vspace{3pt}
-
-\choiceitem{B}{would have allowed}
-
-\vspace{3pt}
-
-\choiceitem{C}{will have allowed}
-
-\vspace{3pt}
-
-\choiceitem{D}{would allow}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{would have been allowed}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{would have allowed}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{will have allowed}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{would allow}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{If it had not rained last night, the roads in the city \underline{\hspace{1.3cm}} so slippery now.}
 
-\vspace{6pt}
-\choiceitem{A}{would not be}
-
-\vspace{3pt}
-
-\choiceitem{B}{must not be}
-
-\vspace{3pt}
-
-\choiceitem{C}{could not have been}
-
-\vspace{3pt}
-
-\choiceitem{D}{would not have been}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{would not be}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{must not be}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{could not have been}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{would not have been}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{She helped us a lot with our project. We couldn't continue without her.}
 
-\vspace{6pt}
-\choiceitem{A}{Unless we had her contribution, we could continue with the project.}
-
-\vspace{3pt}
-
-\choiceitem{B}{But for her contribution, we could have continued with the project.}
-
-\vspace{3pt}
-
-\choiceitem{C}{If she hadn't contributed positively, we couldn't have continued with the project.}
-
-\vspace{3pt}
-
-\choiceitem{D}{Provided her contribution wouldn't come, we couldn't continue with the project.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{Unless we had her contribution, we could continue with the project.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{But for her contribution, we could have continued with the project.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{If she hadn't contributed positively, we couldn't have continued with the project.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Provided her contribution wouldn't come, we couldn't continue with the project.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{What noisy neighbors you've got! If my neighbors \underline{\hspace{1.3cm}} as bad as yours, I \underline{\hspace{1.3cm}} crazy.}
 
-\vspace{6pt}
-\choiceitem{A}{are; will go}
-
-\vspace{3pt}
-
-\choiceitem{B}{were; would go}
-
-\vspace{3pt}
-
-\choiceitem{C}{had been; would have gone}
-
-\vspace{3pt}
-
-\choiceitem{D}{are; would go}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{are; will go}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{were; would go}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{had been; would have gone}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{are; would go}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{If he \underline{\hspace{1.3cm}} the lesson yesterday, he could do the test better today.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{has reviewed}\hfill \choiceitem{B}{had reviewed}\hfill \choiceitem{C}{will review}\hfill \choiceitem{D}{reviewed}}
 
 \question[Trắc nghiệm]{If I hadn't had so much work to do, I would have gone to the movies.}
 
-\vspace{6pt}
-\choiceitem{A}{I never go to the movies if 1 had work to do.}
-
-\vspace{3pt}
-
-\choiceitem{B}{Because I had to do so much work, I couldn't go to the movies.}
-
-\vspace{3pt}
-
-\choiceitem{C}{I would go to the movies when I had done so much work.}
-
-\vspace{3pt}
-
-\choiceitem{D}{A lot of work couldn't prevent me from going to the movies.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{I never go to the movies if 1 had work to do.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{Because I had to do so much work, I couldn't go to the movies.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{I would go to the movies when I had done so much work.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{A lot of work couldn't prevent me from going to the movies.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Unless you \underline{\hspace{1.3cm}} well-trained, you \underline{\hspace{1.3cm}} to the company.}
 
-\vspace{6pt}
-\choiceitem{A}{aren't; will never be admitted}
-
-\vspace{3pt}
-
-\choiceitem{B}{aren't; will never admit}
-
-\vspace{3pt}
-
-\choiceitem{C}{are; will never be admitted}
-
-\vspace{3pt}
-
-\choiceitem{D}{are; will never admit}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{aren't; will never be admitted}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{aren't; will never admit}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{are; will never be admitted}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{are; will never admit}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{If the prisoners attempt to escape from prison, \underline{\hspace{1.3cm}} immediately.}
 
-\vspace{6pt}
-\choiceitem{A}{they will have caught}
-
-\vspace{3pt}
-
-\choiceitem{B}{they will catch}
-
-\vspace{3pt}
-
-\choiceitem{C}{they will be caught}
-
-\vspace{3pt}
-
-\choiceitem{D}{they would be caught}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{they will have caught}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{they will catch}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{they will be caught}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{they would be caught}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{If it \underline{\hspace{1.3cm}} warm yesterday, we would have gone to the beach.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{was}\hfill \choiceitem{B}{were}\hfill \choiceitem{C}{had been}\hfill \choiceitem{D}{could be.}}
 
 \question[Trắc nghiệm]{Given the significant voter turnout in the last election, the candidates\underline{\hspace{1.3cm}} strong campaigns.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{must have run}\hfill \choiceitem{B}{should have run}\hfill \choiceitem{C}{needn’t have run}\hfill \choiceitem{D}{can’t have run}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{must have run}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{should have run}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{needn’t have run}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{can’t have run}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{We \underline{\hspace{1.3cm}} the game, even if we’d wanted to. It was raining very hard, and we had to stop.}
 
-\vspace{6pt}
-\choiceitem{A}{must have finished}
-
-\vspace{3pt}
-
-\choiceitem{B}{couldn’t have finished}
-
-\vspace{3pt}
-
-\choiceitem{C}{needn’t have finished}
-
-\vspace{3pt}
-
-\choiceitem{D}{can’t have finished}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{must have finished}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{couldn’t have finished}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{needn’t have finished}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{can’t have finished}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{If you want your ideas to be heard, you need to learn \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{being more assertive}
-
-\vspace{3pt}
-
-\choiceitem{B}{to be more assertive}
-
-\vspace{3pt}
-
-\choiceitem{C}{to have been assertive}
-
-\vspace{3pt}
-
-\choiceitem{D}{having to be more assertive}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{being more assertive}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{to be more assertive}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{to have been assertive}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{having to be more assertive}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} a scholarship, he would never have been able to afford the tuition fees at such a prestigious university.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{But for}\hfill \choiceitem{B}{Had it not been for}\hfill \choiceitem{C}{Only if}\hfill \choiceitem{D}{Were it not for}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{But for}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{Had it not been for}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{Only if}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Were it not for}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The marketing team \underline{\hspace{1.3cm}} the SMART goals properly; otherwise, the entire advertising campaign wouldn't have failed so miserably last month.}
 
-\vspace{6pt}
-\choiceitem{A}{shouldn't have defined}
-
-\vspace{3pt}
-
-\choiceitem{B}{must have defined}
-
-\vspace{3pt}
-
-\choiceitem{C}{needn't have defined}
-
-\vspace{3pt}
-
-\choiceitem{D}{can't have defined}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{shouldn't have defined}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{must have defined}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{needn't have defined}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{can't have defined}\par\vspace{4pt}
 
 \setcounter{qcounter}{0}
 \begin{groupbox}\textbf{\large Nhóm câu hỏi về cấu trúc câu (Chuyên đề bổ trợ phụ lục 6)}\end{groupbox}
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} the letter, she cried a lot because of what he had written to her.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{Having read}\hfill \choiceitem{B}{To read}\hfill \choiceitem{C}{Read}\hfill \choiceitem{D}{Being read}}
 
 \question[Trắc nghiệm]{Today, the old couple has their family and friends \underline{\hspace{1.3cm}} their golden wedding anniversary.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{attend}\hfill \choiceitem{B}{to attend}\hfill \choiceitem{C}{attended}\hfill \choiceitem{D}{attending}}
 
 \question[Trắc nghiệm]{The jury \underline{\hspace{1.3cm}} her compliments \underline{\hspace{1.3cm}} her excellent knowledge of the subject.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{returned/to}\hfill \choiceitem{B}{paid/to}\hfill \choiceitem{C}{returned/ on}\hfill \choiceitem{D}{paid/on}}
 
 \question[Trắc nghiệm]{After running up the stairs, I was \underline{\hspace{1.3cm}} breath.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{away from}\hfill \choiceitem{B}{without}\hfill \choiceitem{C}{no}\hfill \choiceitem{D}{out of}}
 
 \question[Trắc nghiệm]{Neil Armstrong was the first man \underline{\hspace{1.3cm}} on the moon.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{walking}\hfill \choiceitem{B}{has walked}\hfill \choiceitem{C}{to walk}\hfill \choiceitem{D}{walked}}
 
 \question[Trắc nghiệm]{It was not until he took off his dark glasses \underline{\hspace{1.3cm}} I realized he was a famous film star.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{as}\hfill \choiceitem{B}{that}\hfill \choiceitem{C}{though}\hfill \choiceitem{D}{since}}
 
 \question[Trắc nghiệm]{I am sure that everything will be all right \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{in the end}\hfill \choiceitem{B}{at the end}\hfill \choiceitem{C}{by the end}\hfill \choiceitem{D}{for the end}}
 
 \question[Trắc nghiệm]{I’m sure you'll have no \underline{\hspace{1.3cm}} the exam.}
 
-\vspace{6pt}
-\choiceitem{A}{difficulty passing}
-
-\vspace{3pt}
-
-\choiceitem{B}{difficulties to pass}
-
-\vspace{3pt}
-
-\choiceitem{C}{difficulty to pass}
-
-\vspace{3pt}
-
-\choiceitem{D}{difficulties of passing}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{difficulty passing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{difficulties to pass}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{difficulty to pass}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{difficulties of passing}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Vietnam's rice export this year will decrease \underline{\hspace{1.3cm}} about 10\%, compared with that of last year.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{with}\hfill \choiceitem{B}{at}\hfill \choiceitem{C}{by}\hfill \choiceitem{D}{on}}
 
 \question[Trắc nghiệm]{I don't find it difficult to get up early in the morning.}
 
-\vspace{6pt}
-\choiceitem{A}{It's difficult for me to get up early in the morning.}
-
-\vspace{3pt}
-
-\choiceitem{B}{I'm used to getting up early in the morning.}
-
-\vspace{3pt}
-
-\choiceitem{C}{I hate getting up early in the morning.}
-
-\vspace{3pt}
-
-\choiceitem{D}{I used to get up early in the morning.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{It's difficult for me to get up early in the morning.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{I'm used to getting up early in the morning.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{I hate getting up early in the morning.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{I used to get up early in the morning.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{John congratulated us \underline{\hspace{1.3cm}} our exam with high marks.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{on passing}\hfill \choiceitem{B}{for passing}\hfill \choiceitem{C}{to pass}\hfill \choiceitem{D}{on pass}}
 
 \question[Trắc nghiệm]{I assume that you are acquainted \underline{\hspace{1.3cm}} this subject since you are responsible \underline{\hspace{1.3cm}} writing accompanying materials.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{to/for}\hfill \choiceitem{B}{with/for}\hfill \choiceitem{C}{to/to}\hfill \choiceitem{D}{with/with}}
 
 \question[Trắc nghiệm]{The old woman accused the boy \underline{\hspace{1.3cm}} the window.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{in breaking}\hfill \choiceitem{B}{on breaking}\hfill \choiceitem{C}{at breaking}\hfill \choiceitem{D}{of breaking}}
 
 \question[Trắc nghiệm]{In order to make the house more beautiful and newer, the Browns had it \underline{\hspace{1.3cm}} yesterday.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{to be repainted}\hfill \choiceitem{B}{repaint}\hfill \choiceitem{C}{repainted}\hfill \choiceitem{D}{to repaint}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{to be repainted}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{repaint}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{repainted}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{to repaint}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I love \underline{\hspace{1.3cm}} films but I seldom find time to go to the cinema.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{seeing}\hfill \choiceitem{B}{see}\hfill \choiceitem{C}{saw}\hfill \choiceitem{D}{seen}}
 
 \question[Trắc nghiệm]{We're going to freeze out here if you don't let us \underline{\hspace{1.3cm}} the bus.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{come up}\hfill \choiceitem{B}{go into}\hfill \choiceitem{C}{take off}\hfill \choiceitem{D}{get on}}
 
 \question[Trắc nghiệm]{Kevin put a fence so that people didn't walk on his garden.}
 
-\vspace{6pt}
-\choiceitem{A}{Kevin put a fence because he wants to remind people to walk on his garden.}
-
-\vspace{3pt}
-
-\choiceitem{B}{Kevin put a fence to prevent people from walking on his garden.}
-
-\vspace{3pt}
-
-\choiceitem{C}{In order to tell people to walk on his garden, Kevin put a fence.}
-
-\vspace{3pt}
-
-\choiceitem{D}{So as to encourage people to walk on his garden, Kevin put a fence.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{Kevin put a fence because he wants to remind people to walk on his garden.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{Kevin put a fence to prevent people from walking on his garden.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{In order to tell people to walk on his garden, Kevin put a fence.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{So as to encourage people to walk on his garden, Kevin put a fence.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I regret going to the cinema. I wish I \underline{\hspace{1.3cm}}}
 
-\vspace{6pt}
-\choiceitem{A}{hadn't gone there}
-
-\vspace{3pt}
-
-\choiceitem{B}{haven’t gone there}
-
-\vspace{3pt}
-
-\choiceitem{C}{didn't go there}
-
-\vspace{3pt}
-
-\choiceitem{D}{would not go there}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{hadn't gone there}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{haven’t gone there}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{didn't go there}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{would not go there}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{"Why don't you ask your parents for advice?" said Tom.}
 
-\vspace{6pt}
-\choiceitem{A}{Tom advised me asking my parents for advice.}
-
-\vspace{3pt}
-
-\choiceitem{B}{Tom said to me to ask my parents for advice.}
-
-\vspace{3pt}
-
-\choiceitem{C}{Tom wanted to know the reason why I don't ask my parents for advice.}
-
-\vspace{3pt}
-
-\choiceitem{D}{Tom suggested that I ask my parents for advice.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{Tom advised me asking my parents for advice.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{Tom said to me to ask my parents for advice.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{Tom wanted to know the reason why I don't ask my parents for advice.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Tom suggested that I ask my parents for advice.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{He was suspected to have stolen credit cards. The police have investigated him for days.}
 
-\vspace{6pt}
-\choiceitem{A}{He has been investigated for days, suspected to have stolen credit cards.}
-
-\vspace{3pt}
-
-\choiceitem{B}{Suspecting to have stolen credit cards, he has been investigated for days.}
-
-\vspace{3pt}
-
-\choiceitem{C}{Having suspected to have stolen credit cards, he has been investigated for days.}
-
-\vspace{3pt}
-
-\choiceitem{D}{Suspected to have stolen credit cards, he has been investigated for days.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{He has been investigated for days, suspected to have stolen credit cards.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{Suspecting to have stolen credit cards, he has been investigated for days.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{Having suspected to have stolen credit cards, he has been investigated for days.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Suspected to have stolen credit cards, he has been investigated for days.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The house is too dark. You need \underline{\hspace{1.3cm}} a bright color.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{to be painted}\hfill \choiceitem{B}{painting it}\hfill \choiceitem{C}{to have it painted}\hfill \choiceitem{D}{to have it paint}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{to be painted}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{painting it}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{to have it painted}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{to have it paint}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{My music teacher suggested \underline{\hspace{1.3cm}} for an hour before breakfast.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{practising}\hfill \choiceitem{B}{to practise}\hfill \choiceitem{C}{having practised}\hfill \choiceitem{D}{to practising}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{practising}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{to practise}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{having practised}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{to practising}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{It's no good \underline{\hspace{1.3cm}} to him; he never answers letters.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{write}\hfill \choiceitem{B}{to write}\hfill \choiceitem{C}{writing}\hfill \choiceitem{D}{for writing}}
 
 \question[Trắc nghiệm]{We all \underline{\hspace{1.3cm}} working with you. You are so dynamic.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{believe}\hfill \choiceitem{B}{judge}\hfill \choiceitem{C}{think}\hfill \choiceitem{D}{appreciate}}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} have made communication faster and easier through the use of email and Internet is widely recognized.}
 
-\vspace{6pt}
-\choiceitem{A}{That it is computers}
-
-\vspace{3pt}
-
-\choiceitem{B}{That computers}
-
-\vspace{3pt}
-
-\choiceitem{C}{Computers that}
-
-\vspace{3pt}
-
-\choiceitem{D}{It is that computers}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{That it is computers}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{That computers}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{Computers that}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{It is that computers}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{He \underline{\hspace{1.3cm}} his wife for forgetting their wedding anniversary.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{approached}\hfill \choiceitem{B}{reproached}\hfill \choiceitem{C}{reproduced}\hfill \choiceitem{D}{renounced}}
 
 \question[Trắc nghiệm]{Bill was on the verge of speeding when he saw the patrolman.}
 
-\vspace{6pt}
-\choiceitem{A}{Bill was given a speeding ticket by the patrolman.}
-
-\vspace{3pt}
-
-\choiceitem{B}{Bill was speeding when he saw the patrolman.}
-
-\vspace{3pt}
-
-\choiceitem{C}{Bill was about to speed when he saw the patrolman.}
-
-\vspace{3pt}
-
-\choiceitem{D}{Bill told the patrolman that he had not been speeding.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{Bill was given a speeding ticket by the patrolman.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{Bill was speeding when he saw the patrolman.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{Bill was about to speed when he saw the patrolman.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Bill told the patrolman that he had not been speeding.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Lan didn't apply for the job in the library and regrets it now.}
 
-\vspace{6pt}
-\choiceitem{A}{Lan wishes she had applied for the job in the library.}
-
-\vspace{3pt}
-
-\choiceitem{B}{Lan wishes she hadn't applied for the job in the library.}
-
-\vspace{3pt}
-
-\choiceitem{C}{Lan wishes she would apply for the job in the library.}
-
-\vspace{3pt}
-
-\choiceitem{D}{Lan wishes she applies for the job in the library.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{Lan wishes she had applied for the job in the library.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{Lan wishes she hadn't applied for the job in the library.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{Lan wishes she would apply for the job in the library.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Lan wishes she applies for the job in the library.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Why not \underline{\hspace{1.3cm}} the meeting until Thursday morning?}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{postpone}\hfill \choiceitem{B}{postponing}\hfill \choiceitem{C}{you postpone}\hfill \choiceitem{D}{do you postpone}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{postpone}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{postponing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{you postpone}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{do you postpone}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{There is no point in your phoning Jane - she's away.}
 
-\vspace{6pt}
-\choiceitem{A}{It would be a waste of time phoning Jane - she's away.}
-
-\vspace{3pt}
-
-\choiceitem{B}{You waste your time if you insist on phoning Jane - she's away.}
-
-\vspace{3pt}
-
-\choiceitem{C}{Don't spend your valuable time phoning Jane - she's out.}
-
-\vspace{3pt}
-
-\choiceitem{D}{Jane is very difficult to phone - she's always away.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{It would be a waste of time phoning Jane - she's away.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{You waste your time if you insist on phoning Jane - she's away.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{Don't spend your valuable time phoning Jane - she's out.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Jane is very difficult to phone - she's always away.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{We've had to postpone \underline{\hspace{1.3cm}} to France because the children are ill.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{be gone}\hfill \choiceitem{B}{to go}\hfill \choiceitem{C}{going}\hfill \choiceitem{D}{go}}
 
 \question[Trắc nghiệm]{I didn't see the red light at the crossroads. Otherwise, I \underline{\hspace{1.3cm}} my car.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{stopped}\hfill \choiceitem{B}{had stopped}\hfill \choiceitem{C}{would have stopped}\hfill \choiceitem{D}{would stop}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{stopped}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{had stopped}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{would have stopped}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{would stop}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I remember \underline{\hspace{1.3cm}} him tomorrow. It will be a big sum of money I've been saving so far.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{paying}\hfill \choiceitem{B}{to pay}\hfill \choiceitem{C}{paid}\hfill \choiceitem{D}{to be paid}}
 
 \question[Trắc nghiệm]{The bed-ridden old man objected \underline{\hspace{1.3cm}} as a burden on his family.}
 
-\vspace{6pt}
-\choiceitem{A}{to being regarded}
-
-\vspace{3pt}
-
-\choiceitem{B}{at his being regarded}
-
-\vspace{3pt}
-
-\choiceitem{C}{with his regarding}
-
-\vspace{3pt}
-
-\choiceitem{D}{for regarding}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{to being regarded}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{at his being regarded}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{with his regarding}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{for regarding}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Her mother can't stand \underline{\hspace{1.3cm}} her at home all day.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{seeing}\hfill \choiceitem{B}{see}\hfill \choiceitem{C}{seen}\hfill \choiceitem{D}{to see}}
 
 \question[Trắc nghiệm]{My little brother is very \underline{\hspace{1.3cm}} collecting sea shells.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{interested of}\hfill \choiceitem{B}{keen in}\hfill \choiceitem{C}{fond on}\hfill \choiceitem{D}{interested in}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{interested of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{keen in}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{fond on}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{interested in}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Tom denied \underline{\hspace{1.3cm}} part in the fighting at school.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{to take}\hfill \choiceitem{B}{take}\hfill \choiceitem{C}{to taking}\hfill \choiceitem{D}{taking}}
 
 \question[Trắc nghiệm]{"I haven't been very open-minded," said the manager.}
 
-\vspace{6pt}
-\choiceitem{A}{The manager promised to be very open-minded.}
-
-\vspace{3pt}
-
-\choiceitem{B}{The manager admitted not having been very open-minded.}
-
-\vspace{3pt}
-
-\choiceitem{C}{The manager denied having been very open-minded.}
-
-\vspace{3pt}
-
-\choiceitem{D}{The manager refused to have been very open-minded.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{The manager promised to be very open-minded.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{The manager admitted not having been very open-minded.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{The manager denied having been very open-minded.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{The manager refused to have been very open-minded.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The president offered his congratulations to the players when they won the cup.}
 
-\vspace{6pt}
-\choiceitem{A}{The president congratulated the players on their winning the match.}
-
-\vspace{3pt}
-
-\choiceitem{B}{When they won the cup, the players had been offered some congratulations from the president.}
-
-\vspace{3pt}
-
-\choiceitem{C}{The president would offered the players congratulations if they won the match.}
-
-\vspace{3pt}
-
-\choiceitem{D}{The president congratulated that the players had won the cup.}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{The president congratulated the players on their winning the match.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{When they won the cup, the players had been offered some congratulations from the president.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{The president would offered the players congratulations if they won the match.}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{The president congratulated that the players had won the cup.}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The child that we caught \underline{\hspace{1.3cm}} was made to stand in the corner of the classroom.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{misbehavior}\hfill \choiceitem{B}{misbehave}\hfill \choiceitem{C}{behaving}\hfill \choiceitem{D}{misbehaving}}
 
 \question[Trắc nghiệm]{The shop assistant is ready to \underline{\hspace{1.3cm}} me a helping hand. She is very nice.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{take}\hfill \choiceitem{B}{lend}\hfill \choiceitem{C}{offer}\hfill \choiceitem{D}{get}}
 
 \question[Trắc nghiệm]{Young people have become increasingly committed \underline{\hspace{1.3cm}} social activities.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{of}\hfill \choiceitem{B}{in}\hfill \choiceitem{C}{to}\hfill \choiceitem{D}{at}}
 
 \question[Trắc nghiệm]{The suspect confessed \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{the police his crime}
-
-\vspace{3pt}
-
-\choiceitem{B}{his crime}
-
-\vspace{3pt}
-
-\choiceitem{C}{his crime the police}
-
-\vspace{3pt}
-
-\choiceitem{D}{his crime to the police}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{the police his crime}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{his crime}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{his crime the police}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{his crime to the police}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{She \underline{\hspace{1.3cm}} to the station every day but then she suddenly decided to walk instead.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{used to}\hfill \choiceitem{B}{was used to}\hfill \choiceitem{C}{had used to}\hfill \choiceitem{D}{didn't used to}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{used to}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{was used to}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{had used to}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{didn't used to}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{There has been an announcement from the Principal that the students will not hear the bell \underline{\hspace{1.3cm}} this week as it has broken.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{ring}\hfill \choiceitem{B}{ringing}\hfill \choiceitem{C}{rang}\hfill \choiceitem{D}{rung}}
 
 \question[Trắc nghiệm]{Don't use the milk I bought last month. It's \underline{\hspace{1.3cm}} date now.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{out of}\hfill \choiceitem{B}{in for}\hfill \choiceitem{C}{into}\hfill \choiceitem{D}{over}}
 
 \question[Trắc nghiệm]{I don't mind \underline{\hspace{1.3cm}} much homework.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{did}\hfill \choiceitem{B}{to do}\hfill \choiceitem{C}{do}\hfill \choiceitem{D}{doing}}
 
 \question[Trắc nghiệm]{My student practises \underline{\hspace{1.3cm}} English with her friends every day.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{speaking}\hfill \choiceitem{B}{to speak}\hfill \choiceitem{C}{spoke}\hfill \choiceitem{D}{speak}}
 
 \question[Trắc nghiệm]{Studies indicate \underline{\hspace{1.3cm}} collecting art today than ever before.}
 
-\vspace{6pt}
-\choiceitem{A}{more people that are}
-
-\vspace{3pt}
-
-\choiceitem{B}{there are that more people}
-
-\vspace{3pt}
-
-\choiceitem{C}{that there are more people}
-
-\vspace{3pt}
-
-\choiceitem{D}{people there are more}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{more people that are}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{there are that more people}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{that there are more people}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{people there are more}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Edith Harlow has kindly agreed \underline{\hspace{1.3cm}}. You should ask him.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{to helping}\hfill \choiceitem{B}{to help}\hfill \choiceitem{C}{help}\hfill \choiceitem{D}{helping}}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}}, he tried his father didn't let him run the company.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{Although hard}\hfill \choiceitem{B}{No matter what}\hfill \choiceitem{C}{However hard}\hfill \choiceitem{D}{Whatever hard}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{Although hard}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{No matter what}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{However hard}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Whatever hard}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{As well as \underline{\hspace{1.3cm}} in an office he used to have a part-time as a waiter.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{having worked}\hfill \choiceitem{B}{working}\hfill \choiceitem{C}{to have worked}\hfill \choiceitem{D}{to work}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{having worked}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{working}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{to have worked}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{to work}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I was just about \underline{\hspace{1.3cm}} the office when the telephone rang.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{to have left}\hfill \choiceitem{B}{leave}\hfill \choiceitem{C}{to leave}\hfill \choiceitem{D}{leaving}}
 
 \question[Trắc nghiệm]{Instead of \underline{\hspace{1.3cm}} about the good news, Peter seemed to be indifferent.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{exciting}\hfill \choiceitem{B}{being excited}\hfill \choiceitem{C}{to excite}\hfill \choiceitem{D}{to be excited}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{exciting}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{being excited}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{to excite}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{to be excited}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{She nearly lost her own life \underline{\hspace{1.3cm}} attempting to save the child from drowning.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{at}\hfill \choiceitem{B}{with}\hfill \choiceitem{C}{in}\hfill \choiceitem{D}{for}}
 
 \question[Trắc nghiệm]{Tom never comes to class on time and \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{neither does Peter}
-
-\vspace{3pt}
-
-\choiceitem{B}{so does Peter}
-
-\vspace{3pt}
-
-\choiceitem{C}{so doesn't Peter}
-
-\vspace{3pt}
-
-\choiceitem{D}{neither doesn't Peter}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{neither does Peter}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{so does Peter}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{so doesn't Peter}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{neither doesn't Peter}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{This book provides students \underline{\hspace{1.3cm}} useful tips that help them to pass the coming exam.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{about}\hfill \choiceitem{B}{for}\hfill \choiceitem{C}{with}\hfill \choiceitem{D}{to}}
 
 \question[Trắc nghiệm]{Having been selected to represent the company, \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{the members applauded him}
-
-\vspace{3pt}
-
-\choiceitem{B}{a speech had to be given by him}
-
-\vspace{3pt}
-
-\choiceitem{C}{the members congratulated him}
-
-\vspace{3pt}
-
-\choiceitem{D}{he gave a short speech}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{the members applauded him}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{a speech had to be given by him}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{the members congratulated him}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{he gave a short speech}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Many a \underline{\hspace{1.3cm}} it difficult to avoid the interference of mass media in their life.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{pop star find}\hfill \choiceitem{B}{pop star finds}\hfill \choiceitem{C}{pop stars find}\hfill \choiceitem{D}{pop stars finds}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{pop star find}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{pop star finds}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{pop stars find}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{pop stars finds}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{All candidates will be treated equally, \underline{\hspace{1.3cm}} of their age or background.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{irrelevant}\hfill \choiceitem{B}{Discounting}\hfill \choiceitem{C}{notwithstanding}\hfill \choiceitem{D}{irrespective}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{irrelevant}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{Discounting}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{notwithstanding}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{irrespective}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{He tried to limit himself \underline{\hspace{1.3cm}} 10 cigarettes a day.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{be smoking}\hfill \choiceitem{B}{have smoked}\hfill \choiceitem{C}{smoke}\hfill \choiceitem{D}{smoking}}
 
 \question[Trắc nghiệm]{The tin opener seemed \underline{\hspace{1.3cm}} for left-hand people.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{to be designed}\hfill \choiceitem{B}{being designed}\hfill \choiceitem{C}{to design}\hfill \choiceitem{D}{designing}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{to be designed}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{being designed}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{to design}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{designing}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Rarely have I visited \underline{\hspace{1.3cm}}, the capital of Slovenia.}
 
-\vspace{6pt}
-\choiceitem{A}{as a beautiful city as}
-
-\vspace{3pt}
-
-\choiceitem{B}{as beautiful a city as}
-
-\vspace{3pt}
-
-\choiceitem{C}{as beautiful as the city}
-
-\vspace{3pt}
-
-\choiceitem{D}{as a city as beautiful as}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{as a beautiful city as}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{as beautiful a city as}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{as beautiful as the city}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{as a city as beautiful as}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I don't remember \underline{\hspace{1.3cm}} the front door when I left home this morning.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{to lock}\hfill \choiceitem{B}{locking}\hfill \choiceitem{C}{locked}\hfill \choiceitem{D}{lock}}
 
 \question[Trắc nghiệm]{He managed to climb over the wall without \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{seeing}\hfill \choiceitem{B}{being seen}\hfill \choiceitem{C}{to see}\hfill \choiceitem{D}{to be seen}}
 
 \question[Trắc nghiệm]{I called Jenna yesterday with a view \underline{\hspace{1.3cm}} her about the project.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{of asking}\hfill \choiceitem{B}{to asking}\hfill \choiceitem{C}{in asking}\hfill \choiceitem{D}{for asking}}
 
 \question[Trắc nghiệm]{Many students found it very difficult to keep \underline{\hspace{1.3cm}} all the recent developments in the subject.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{touch with}\hfill \choiceitem{B}{in touch with}\hfill \choiceitem{C}{touch of}\hfill \choiceitem{D}{in touch of}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{touch with}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{in touch with}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{touch of}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{in touch of}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{This house \underline{\hspace{1.3cm}} a non-profit organization.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{belongs in}\hfill \choiceitem{B}{belongs to}\hfill \choiceitem{C}{belongs for}\hfill \choiceitem{D}{belongs at}}
 
 \question[Trắc nghiệm]{David is a captain of the school basketball team, \underline{\hspace{1.3cm}} his father before him.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{similar to}\hfill \choiceitem{B}{just like}\hfill \choiceitem{C}{such as}\hfill \choiceitem{D}{as well as}}
 
 \question[Trắc nghiệm]{Her eyes are \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{the same colour as her mother's}
-
-\vspace{3pt}
-
-\choiceitem{B}{the same colour as her mother}
-
-\vspace{3pt}
-
-\choiceitem{C}{John studied art in Florence}
-
-\vspace{3pt}
-
-\choiceitem{D}{having same colour as her mother}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{the same colour as her mother's}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{the same colour as her mother}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{John studied art in Florence}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{having same colour as her mother}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{When friends insist on \underline{\hspace{1.3cm}} expensive gifts, it makes most people uncomfortable.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{them to accept}\hfill \choiceitem{B}{they accepting}\hfill \choiceitem{C}{their accepting}\hfill \choiceitem{D}{they accept}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{them to accept}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{they accepting}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{their accepting}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{they accept}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The driver is \underline{\hspace{1.3cm}} for the safety of his passengers.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{capatable}\hfill \choiceitem{B}{accused}\hfill \choiceitem{C}{taking charge}\hfill \choiceitem{D}{responsible}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{capatable}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{accused}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{taking charge}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{responsible}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{For the first time in 70 years, \underline{\hspace{1.3cm}} aspirin's potential beyond reducing pain, fever and inflammation.}
 
-\vspace{6pt}
-\choiceitem{A}{researchers began understand}
-
-\vspace{3pt}
-
-\choiceitem{B}{researchers began to understand}
-
-\vspace{3pt}
-
-\choiceitem{C}{researchers begin understanding}
-
-\vspace{3pt}
-
-\choiceitem{D}{researchers' understanding of}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{researchers began understand}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{researchers began to understand}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{researchers begin understanding}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{researchers' understanding of}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} we're been having!}
 
-\vspace{6pt}
-\choiceitem{A}{How dreadful the weather}
-
-\vspace{3pt}
-
-\choiceitem{B}{what dreadful weather}
-
-\vspace{3pt}
-
-\choiceitem{C}{What a dreadful weather}
-
-\vspace{3pt}
-
-\choiceitem{D}{How dreadful is the weather}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{How dreadful the weather}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{what dreadful weather}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{What a dreadful weather}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{How dreadful is the weather}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{They are going to demolish those slums for the street \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{widening}\hfill \choiceitem{B}{to widen}\hfill \choiceitem{C}{to be widened}\hfill \choiceitem{D}{being widened}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{widening}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{to widen}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{to be widened}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{being widened}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The manager charged her \underline{\hspace{1.3cm}} irresponsibility and dishonesty.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{for}\hfill \choiceitem{B}{on}\hfill \choiceitem{C}{about}\hfill \choiceitem{D}{with}}
 
 \question[Trắc nghiệm]{Let me please \underline{\hspace{1.3cm}} my memory before I get down to answering the questions.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{resume}\hfill \choiceitem{B}{ease}\hfill \choiceitem{C}{awake}\hfill \choiceitem{D}{refresh}}
 
 \question[Trắc nghiệm]{Going on this diet has really \underline{\hspace{1.3cm}} me good. I've lost weight and I feel fantastic!}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{done}\hfill \choiceitem{B}{taken}\hfill \choiceitem{C}{made}\hfill \choiceitem{D}{had}}
 
 \question[Trắc nghiệm]{I have lived near the airport for so long now that I've grown \underline{\hspace{1.3cm}} to the noise of the airplanes.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{accustomed}\hfill \choiceitem{B}{unconscious}\hfill \choiceitem{C}{familiar}\hfill \choiceitem{D}{aware}}
 
 \question[Trắc nghiệm]{It \underline{\hspace{1.3cm}} me only five minutes to get to school.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{cost}\hfill \choiceitem{B}{took}\hfill \choiceitem{C}{brought}\hfill \choiceitem{D}{spent}}
 
 \setcounter{qcounter}{0}
 \begin{groupbox}\textbf{\large Nhóm câu hỏi về từ vựng}\end{groupbox}
 \question[Trắc nghiệm]{Jane improved her grades after changing her study \underline{\hspace{1.3cm}} to active recall and spaced repetition.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{action}\hfill \choiceitem{B}{method}\hfill \choiceitem{C}{routine}\hfill \choiceitem{D}{place}}
 
 \question[Trắc nghiệm]{The hospital invested in modern \underline{\hspace{1.3cm}} to improve diagnostic accuracy.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{strategy}\hfill \choiceitem{B}{equipment}\hfill \choiceitem{C}{judgement}\hfill \choiceitem{D}{staff}}
 
 \question[Trắc nghiệm]{I stopped by the \underline{\hspace{1.3cm}} store to grab some snacks before class.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{pharmacy}\hfill \choiceitem{B}{stationery}\hfill \choiceitem{C}{convenience}\hfill \choiceitem{D}{electronics}}
 
 \question[Trắc nghiệm]{Regular exercise is crucial for maintaining \underline{\hspace{1.3cm}} health.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{mental}\hfill \choiceitem{B}{emotional}\hfill \choiceitem{C}{muscular}\hfill \choiceitem{D}{physical}}
 
 \question[Trắc nghiệm]{When in Hanoi, don’t miss trying Pho, a local \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{flavor}\hfill \choiceitem{B}{ingredient}\hfill \choiceitem{C}{speciality}\hfill \choiceitem{D}{brand}}
 
 \question[Trắc nghiệm]{Social \underline{\hspace{1.3cm}} feeds can be added directly to the phone’s home screen.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{media}\hfill \choiceitem{B}{activity}\hfill \choiceitem{C}{life}\hfill \choiceitem{D}{event}}
 
 \question[Trắc nghiệm]{The Pyramids of Giza are a \underline{\hspace{1.3cm}} wonder with deep historical significance.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{cultural}\hfill \choiceitem{B}{modern}\hfill \choiceitem{C}{natural}\hfill \choiceitem{D}{artistic}}
 
 \question[Trắc nghiệm]{They were quite \underline{\hspace{1.3cm}} donating to several charities.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{friendly}\hfill \choiceitem{B}{hospitable}\hfill \choiceitem{C}{selfish}\hfill \choiceitem{D}{generous}}
 
 \question[Trắc nghiệm]{The Eiffel Tower is the most visited tourist \underline{\hspace{1.3cm}} in France.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{activity}\hfill \choiceitem{B}{venue}\hfill \choiceitem{C}{attraction}\hfill \choiceitem{D}{platform}}
 
 \question[Trắc nghiệm]{Many people are more interested in job satisfaction than in \underline{\hspace{1.3cm}} large amounts of money.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{paying}\hfill \choiceitem{B}{catching}\hfill \choiceitem{C}{earning}\hfill \choiceitem{D}{keeping}}
 
 \question[Trắc nghiệm]{These days \underline{\hspace{1.3cm}} everybody is aware of the danger of smoking.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{almost}\hfill \choiceitem{B}{most}\hfill \choiceitem{C}{mostly}\hfill \choiceitem{D}{most of}}
 
 \question[Trắc nghiệm]{My decision to leave university after a year is the one I now \underline{\hspace{1.3cm}} regret.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{harshly}\hfill \choiceitem{B}{keenly}\hfill \choiceitem{C}{painfully}\hfill \choiceitem{D}{heavily}}
 
 \question[Trắc nghiệm]{He \underline{\hspace{1.3cm}} so much harm on the nation during his regime that it has never fully recovered.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{indicted}\hfill \choiceitem{B}{inferred}\hfill \choiceitem{C}{induced}\hfill \choiceitem{D}{inflicted}}
 
 \question[Trắc nghiệm]{The scientists are encountering the difficulties of \underline{\hspace{1.3cm}} of radioactive waste.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{depleting}\hfill \choiceitem{B}{disposing}\hfill \choiceitem{C}{eliminating}\hfill \choiceitem{D}{preserving}}
 
 \question[Trắc nghiệm]{Is an inexperienced civil servant \underline{\hspace{1.3cm}} to the task of running the company.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{capable}\hfill \choiceitem{B}{suited}\hfill \choiceitem{C}{skilled}\hfill \choiceitem{D}{eligible}}
 
 \question[Trắc nghiệm]{My father is forever finding \underline{\hspace{1.3cm}} with the way I dress.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{error}\hfill \choiceitem{B}{mistake}\hfill \choiceitem{C}{blemish}\hfill \choiceitem{D}{fault}}
 
 \question[Trắc nghiệm]{Thanks to her teacher’s encouragement, she has made great \underline{\hspace{1.3cm}} in her study.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{impacts}\hfill \choiceitem{B}{acquisitions}\hfill \choiceitem{C}{contributions}\hfill \choiceitem{D}{strides}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{impacts}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{acquisitions}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{contributions}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{strides}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{In a consumer society, it is easier to purchase inexpensive items; nonetheless, buying a cheap thing may be a/an \underline{\hspace{1.3cm}} economy.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{false}\hfill \choiceitem{B}{artificial}\hfill \choiceitem{C}{fake}\hfill \choiceitem{D}{unreal}}
 
 \question[Trắc nghiệm]{First, we have to find out to what \underline{\hspace{1.3cm}} the drop in car imports is related to the increase of interest rates.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{extent}\hfill \choiceitem{B}{level}\hfill \choiceitem{C}{scale}\hfill \choiceitem{D}{amount}}
 
 \question[Trắc nghiệm]{My brother wasn’t satisfied with the \underline{\hspace{1.3cm}} he was getting, so he decided to quit his job.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{allowance}\hfill \choiceitem{B}{income}\hfill \choiceitem{C}{reward}\hfill \choiceitem{D}{salary}}
 
 \question[Trắc nghiệm]{As the hospital had been careless with its hygiene procedures, the patient found she had been \underline{\hspace{1.3cm}} with a harmful virus.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{suspected}\hfill \choiceitem{B}{infected}\hfill \choiceitem{C}{rejected}\hfill \choiceitem{D}{detected}}
 
 \question[Trắc nghiệm]{Ella added water to \underline{\hspace{1.3cm}} the mixture because it was too strong.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{dissolve}\hfill \choiceitem{B}{strengthen}\hfill \choiceitem{C}{dilute}\hfill \choiceitem{D}{expand}}
 
 \question[Trắc nghiệm]{The accountant is responsible for the \underline{\hspace{1.3cm}} of funds.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{interaction}\hfill \choiceitem{B}{allotment}\hfill \choiceitem{C}{parting}\hfill \choiceitem{D}{sharing}}
 
 \question[Trắc nghiệm]{They were planning, \underline{\hspace{1.3cm}} to Celia, to throw a surprise party for her.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{unaware}\hfill \choiceitem{B}{unconventional}\hfill \choiceitem{C}{oblivious}\hfill \choiceitem{D}{unbeknown}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{unaware}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{unconventional}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{oblivious}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{unbeknown}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{During the peak season, tourists came in \underline{\hspace{1.3cm}} to visit the castle.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{blocks}\hfill \choiceitem{B}{piles}\hfill \choiceitem{C}{droves}\hfill \choiceitem{D}{litters}}
 
 \question[Trắc nghiệm]{He was \underline{\hspace{1.3cm}} devastated by the news.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{utterly}\hfill \choiceitem{B}{extremely}\hfill \choiceitem{C}{deeply}\hfill \choiceitem{D}{immensely}}
 
 \question[Trắc nghiệm]{Rosa was so \underline{\hspace{1.3cm}} of coming first in the contest that she did not even train for it.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{objective}\hfill \choiceitem{B}{confident}\hfill \choiceitem{C}{satisfied}\hfill \choiceitem{D}{optimistic}}
 
 \question[Trắc nghiệm]{The election results reflected people’s growing \underline{\hspace{1.3cm}} with the government.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{hostility}\hfill \choiceitem{B}{negativity}\hfill \choiceitem{C}{distrust}\hfill \choiceitem{D}{disenchantment}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{hostility}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{negativity}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{distrust}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{disenchantment}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The careers fair is an excellent opportunity for students to meet \underline{\hspace{1.3cm}} employers and find out what they are looking for in interviewees.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{compulsory}\hfill \choiceitem{B}{productive}\hfill \choiceitem{C}{conspicuous}\hfill \choiceitem{D}{prospective}}
 
 \question[Trắc nghiệm]{Our role as teachers is to guide our students and create \underline{\hspace{1.3cm}} learners, who know what their goals in life are and are able to develop with our guidance.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{autonomous}\hfill \choiceitem{B}{official}\hfill \choiceitem{C}{ambiguous}\hfill \choiceitem{D}{educational}}
 
 \setcounter{qcounter}{0}
 \begin{groupbox}\textbf{\large Nhóm câu hỏi về cụm động từ}\end{groupbox}
 \question[Trắc nghiệm]{Silence \underline{\hspace{1.3cm}} the theatre as the audience awaited the opening curtain with expectation and excitement.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{dropped out}\hfill \choiceitem{B}{fell down}\hfill \choiceitem{C}{hung over}\hfill \choiceitem{D}{came between}}
 
 \question[Trắc nghiệm]{If you pay the restaurant bill with your credit card, we’ll \underline{\hspace{1.3cm}} with you later.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{settle up}\hfill \choiceitem{B}{pay back}\hfill \choiceitem{C}{settle down}\hfill \choiceitem{D}{pay up}}
 
 \question[Trắc nghiệm]{We should try to \underline{\hspace{1.3cm}} plastic waste in order to protect the environment.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{start out}\hfill \choiceitem{B}{run out}\hfill \choiceitem{C}{cut down on}\hfill \choiceitem{D}{make up for}}
 
 \question[Trắc nghiệm]{He always sticks to the basics and never tries anything new; he should really get someone to \underline{\hspace{1.3cm}} at the next party.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{calm things down}\hfill \choiceitem{B}{jazz it up}\hfill \choiceitem{C}{sit it out}\hfill \choiceitem{D}{bring it down}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{calm things down}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{jazz it up}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{sit it out}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{bring it down}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Vietnam is going \underline{\hspace{1.3cm}} a period of remarkable change.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{into}\hfill \choiceitem{B}{through}\hfill \choiceitem{C}{without}\hfill \choiceitem{D}{with}}
 
 \question[Trắc nghiệm]{She gave \underline{\hspace{1.3cm}} her job as an event manager to become a self-employed baker.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{up}\hfill \choiceitem{B}{away}\hfill \choiceitem{C}{over}\hfill \choiceitem{D}{off}}
 
 \question[Trắc nghiệm]{It’s very brave of her to \underline{\hspace{1.3cm}} the bullies who frighten other children.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{stand up to}\hfill \choiceitem{B}{stand back from}\hfill \choiceitem{C}{stand in for}\hfill \choiceitem{D}{stand out from}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{stand up to}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{stand back from}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{stand in for}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{stand out from}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{She believes that all countries should \underline{\hspace{1.3cm}} the death penalty as it is inhumane.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{put up with}\hfill \choiceitem{B}{catch up on}\hfill \choiceitem{C}{get down to}\hfill \choiceitem{D}{do away with}}
 
 \question[Trắc nghiệm]{Minh is going to have to \underline{\hspace{1.3cm}} the fact that his assignment will not be completed before the deadline.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{bring up}\hfill \choiceitem{B}{clear up}\hfill \choiceitem{C}{face up to}\hfill \choiceitem{D}{come up with}}
 
 \question[Trắc nghiệm]{Luckily, the rain \underline{\hspace{1.3cm}} so we were able to play the match.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{watered down}\hfill \choiceitem{B}{gave out}\hfill \choiceitem{C}{got away}\hfill \choiceitem{D}{held off}}
 
 \question[Trắc nghiệm]{Many students find it difficult to \underline{\hspace{1.3cm}} academic pressure, especially before final exams.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{deal with}\hfill \choiceitem{B}{come up with}\hfill \choiceitem{C}{look into}\hfill \choiceitem{D}{carry out}}
 
 \question[Trắc nghiệm]{Burglars \underline{\hspace{1.3cm}} with not only valuables but also sensitive company documents.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{made off}\hfill \choiceitem{B}{cleared out}\hfill \choiceitem{C}{took off}\hfill \choiceitem{D}{bowed out}}
 
 \question[Trắc nghiệm]{While your essay is satisfactory, there are some points that need to be \underline{\hspace{1.3cm}} with evidence and reasoning.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{worn out}\hfill \choiceitem{B}{fleshed out}\hfill \choiceitem{C}{muscled out}\hfill \choiceitem{D}{ironed out}}
 
 \question[Trắc nghiệm]{Now is a good time to \underline{\hspace{1.3cm}} your French before you transfer to the Paris office at the end of this year.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{dust off}\hfill \choiceitem{B}{scrub off}\hfill \choiceitem{C}{sweep away}\hfill \choiceitem{D}{brush up on}}
 
 \question[Trắc nghiệm]{Ms. Sally needs someone to \underline{\hspace{1.3cm}} at the school assembly tomorrow as she is quite sick.}
 
-\vspace{6pt}
-\choiceitem{A}{pull her through}
-
-\vspace{3pt}
-
-\choiceitem{B}{bring her round to}
-
-\vspace{3pt}
-
-\choiceitem{C}{fill her in on}
-
-\vspace{3pt}
-
-\choiceitem{D}{stand in for her}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{pull her through}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{bring her round to}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{fill her in on}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{stand in for her}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The workers would agree to \underline{\hspace{1.3cm}} the strike if the company satisfied their demands.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{make for}\hfill \choiceitem{B}{carry on}\hfill \choiceitem{C}{call off}\hfill \choiceitem{D}{go up}}
 
 \question[Trắc nghiệm]{The old man was so tired and weak that he couldn’t \underline{\hspace{1.3cm}} what I was saying.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{keep up}\hfill \choiceitem{B}{catch in}\hfill \choiceitem{C}{make out}\hfill \choiceitem{D}{get on}}
 
 \question[Trắc nghiệm]{We need to send a representative that we can \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{find out}\hfill \choiceitem{B}{count on}\hfill \choiceitem{C}{catch on}\hfill \choiceitem{D}{stand for}}
 
 \question[Trắc nghiệm]{If orders keep coming in like this, we will have to \underline{\hspace{1.3cm}} more staff.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{give up}\hfill \choiceitem{B}{add in}\hfill \choiceitem{C}{take up}\hfill \choiceitem{D}{take on}}
 
 \question[Trắc nghiệm]{Because it rained very heavily all day they had to \underline{\hspace{1.3cm}} the garden party until the following Saturday.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{put off}\hfill \choiceitem{B}{call off}\hfill \choiceitem{C}{give up}\hfill \choiceitem{D}{hold on}}
 
 \question[Trắc nghiệm]{In this difficult economic time, this positive news will \underline{\hspace{1.3cm}} the whole country.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{take off}\hfill \choiceitem{B}{cheer up}\hfill \choiceitem{C}{count on}\hfill \choiceitem{D}{get along}}
 
 \question[Trắc nghiệm]{Sometimes, people need to have a tooth \underline{\hspace{1.3cm}}. This is called a tooth extraction.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{pulled out}\hfill \choiceitem{B}{knocked down}\hfill \choiceitem{C}{brought down}\hfill \choiceitem{D}{knocked over}}
 
 \question[Trắc nghiệm]{Since the last serious accident, Francis has \underline{\hspace{1.3cm}} motorcycle racing.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{given out}\hfill \choiceitem{B}{given up}\hfill \choiceitem{C}{given in}\hfill \choiceitem{D}{given off}}
 
 \question[Trắc nghiệm]{We have to make sure we \underline{\hspace{1.3cm}} the lights when we’re not in the room in order to conserve electricity.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{put up}\hfill \choiceitem{B}{switch on}\hfill \choiceitem{C}{close off}\hfill \choiceitem{D}{turn off}}
 
 \question[Trắc nghiệm]{You need to \underline{\hspace{1.3cm}} your jacket because the weather is very cold outside.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{give away}\hfill \choiceitem{B}{warm up}\hfill \choiceitem{C}{put on}\hfill \choiceitem{D}{tidy up}}
 
 \setcounter{qcounter}{0}
 \begin{groupbox}\textbf{\large Nhóm câu hỏi về cụm từ cố định}\end{groupbox}
 \question[Trắc nghiệm]{After the factory closed last month, many employees found themselves out of \underline{\hspace{1.3cm}} and struggling to pay their bills.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{order}\hfill \choiceitem{B}{work}\hfill \choiceitem{C}{stock}\hfill \choiceitem{D}{date}}
 
 \question[Trắc nghiệm]{CEOs need to be \underline{\hspace{1.3cm}} accountable for enabling the exploitation of the working class.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{forced}\hfill \choiceitem{B}{made}\hfill \choiceitem{C}{held}\hfill \choiceitem{D}{turned}}
 
 \question[Trắc nghiệm]{You say “Do you mind opening the window for me?” to \underline{\hspace{1.3cm}}}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{offer help}\hfill \choiceitem{B}{ask for help}\hfill \choiceitem{C}{give permission}\hfill \choiceitem{D}{express obligation}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{offer help}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{ask for help}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{give permission}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{express obligation}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Elena \underline{\hspace{1.3cm}} a good chance of passing her exam if she works hard.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{holds}\hfill \choiceitem{B}{runs}\hfill \choiceitem{C}{possesses}\hfill \choiceitem{D}{stands}}
 
 \question[Trắc nghiệm]{On \underline{\hspace{1.3cm}}, Mrs. Minh earns about 14 million VND a month.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{total}\hfill \choiceitem{B}{average}\hfill \choiceitem{C}{sum}\hfill \choiceitem{D}{addition}}
 
 \question[Trắc nghiệm]{It is essential to \underline{\hspace{1.3cm}} awareness about global warming through education and public campaigns.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{raise}\hfill \choiceitem{B}{grow}\hfill \choiceitem{C}{increase}\hfill \choiceitem{D}{build}}
 
 \question[Trắc nghiệm]{Living in another country can be a great opportunity to \underline{\hspace{1.3cm}} new experiences and personal growth.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{gain}\hfill \choiceitem{B}{collect}\hfill \choiceitem{C}{receive}\hfill \choiceitem{D}{earn}}
 
 \question[Trắc nghiệm]{He thought he was the best player on the team, but losing the match \underline{\hspace{1.3cm}} him down to size.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{made}\hfill \choiceitem{B}{reduced}\hfill \choiceitem{C}{chopped}\hfill \choiceitem{D}{cut}}
 
 \question[Trắc nghiệm]{Entering the meeting late, he tried to \underline{\hspace{1.3cm}} an excuse, still, the strict chairman of the board told him to leave the room.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{have}\hfill \choiceitem{B}{give}\hfill \choiceitem{C}{do}\hfill \choiceitem{D}{make}}
 
 \question[Trắc nghiệm]{Applicants will be expected to have a good \underline{\hspace{1.3cm}} of English.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{order}\hfill \choiceitem{B}{aptitude}\hfill \choiceitem{C}{attitude}\hfill \choiceitem{D}{command}}
 
 \question[Trắc nghiệm]{I was told to \underline{\hspace{1.3cm}} the medicine three times a day, before meals.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{take}\hfill \choiceitem{B}{eat}\hfill \choiceitem{C}{get}\hfill \choiceitem{D}{do}}
 
 \question[Trắc nghiệm]{The player’s protests \underline{\hspace{1.3cm}} no difference to the referee’s decision at all.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{made}\hfill \choiceitem{B}{did}\hfill \choiceitem{C}{created}\hfill \choiceitem{D}{caused}}
 
 \question[Trắc nghiệm]{In the last match, Mr. Chung changed his information at half-time, introducing Tuyet Dung in midfield and Hai Yen in attack, but in the end it was Huynh Nhu’s magic that \underline{\hspace{1.3cm}} the difference.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{did}\hfill \choiceitem{B}{made}\hfill \choiceitem{C}{gave}\hfill \choiceitem{D}{took}}
 
 \question[Trắc nghiệm]{I tried not to draw \underline{\hspace{1.3cm}} to the weak points in my argument.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{opinion}\hfill \choiceitem{B}{impression}\hfill \choiceitem{C}{attention}\hfill \choiceitem{D}{consideration}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{opinion}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{impression}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{attention}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{consideration}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Mary said she would come back, and she \underline{\hspace{1.3cm}} her promise.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{kept}\hfill \choiceitem{B}{put}\hfill \choiceitem{C}{gave}\hfill \choiceitem{D}{took}}
 
 \question[Trắc nghiệm]{They \underline{\hspace{1.3cm}} great pride in offering the best service in town.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{makes}\hfill \choiceitem{B}{brings}\hfill \choiceitem{C}{takes}\hfill \choiceitem{D}{keeps}}
 
 \question[Trắc nghiệm]{It never \underline{\hspace{1.3cm}} my head that such great Bulgarian rose festivals would be held in Hanoi, our capital city.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{entered}\hfill \choiceitem{B}{occurred}\hfill \choiceitem{C}{struck}\hfill \choiceitem{D}{dawned}}
 
 \question[Trắc nghiệm]{If we didn’t \underline{\hspace{1.3cm}} any measures to protect whales, they would disappear forever.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{do}\hfill \choiceitem{B}{make}\hfill \choiceitem{C}{use}\hfill \choiceitem{D}{take}}
 
 \question[Trắc nghiệm]{Violent crime has been reduced since the new laws \underline{\hspace{1.3cm}} into effect.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{came}\hfill \choiceitem{B}{made}\hfill \choiceitem{C}{set}\hfill \choiceitem{D}{laid}}
 
 \question[Trắc nghiệm]{I’m not trying to put you on the \underline{\hspace{1.3cm}}, but could you explain why you did that?}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{spot}\hfill \choiceitem{B}{corner}\hfill \choiceitem{C}{stage}\hfill \choiceitem{D}{pot}}
 
 \question[Trắc nghiệm]{The chairman has also \underline{\hspace{1.3cm}} his approval for an investigation into the case.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{given}\hfill \choiceitem{B}{taken}\hfill \choiceitem{C}{received}\hfill \choiceitem{D}{needed}}
 
 \question[Trắc nghiệm]{Since you want to feel like a princess, \underline{\hspace{1.3cm}} an appointment early enough to get your hair and nails done by a professional.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{take}\hfill \choiceitem{B}{get}\hfill \choiceitem{C}{make}\hfill \choiceitem{D}{apply}}
 
 \question[Trắc nghiệm]{The university is \underline{\hspace{1.3cm}} progress in the ongoing development of educational programs, services and facilities.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{having}\hfill \choiceitem{B}{doing}\hfill \choiceitem{C}{making}\hfill \choiceitem{D}{taking}}
 
 \question[Trắc nghiệm]{The student was extremely happy because the teacher \underline{\hspace{1.3cm}} him a compliment in front of the class this morning.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{brought}\hfill \choiceitem{B}{did}\hfill \choiceitem{C}{paid}\hfill \choiceitem{D}{made}}
 
 \question[Trắc nghiệm]{My mum was absolutely overjoyed to finally be \underline{\hspace{1.3cm}} her promotion.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{taken}\hfill \choiceitem{B}{given}\hfill \choiceitem{C}{made}\hfill \choiceitem{D}{caused}}
 
 \setcounter{qcounter}{0}
 \begin{groupbox}\textbf{\large Nhóm câu hỏi về thành ngữ}\end{groupbox}
 \question[Trắc nghiệm]{That traitorous snake \underline{\hspace{1.3cm}} multiple times for his own benefit.}
 
-\vspace{6pt}
-\choiceitem{A}{pulled the plug on people}
-
-\vspace{3pt}
-
-\choiceitem{B}{threw people under the bus}
-
-\vspace{3pt}
-
-\choiceitem{C}{threw people a curveball}
-
-\vspace{3pt}
-
-\choiceitem{D}{pulled the rug out from people’s feet}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{pulled the plug on people}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{threw people under the bus}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{threw people a curveball}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{pulled the rug out from people’s feet}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Be careful and \underline{\hspace{1.3cm}}. You might not be aware of what you are signing up for.}
 
-\vspace{6pt}
-\choiceitem{A}{read the runes}
-
-\vspace{3pt}
-
-\choiceitem{B}{read the fine print}
-
-\vspace{3pt}
-
-\choiceitem{C}{read between the lines}
-
-\vspace{3pt}
-
-\choiceitem{D}{read the room}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{read the runes}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{read the fine print}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{read between the lines}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{read the room}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Just \underline{\hspace{1.3cm}}! Life is miserable when you have to watch out for everything and everyone.}
 
-\vspace{6pt}
-\choiceitem{A}{throw in the towel}
-
-\vspace{3pt}
-
-\choiceitem{B}{throw yourself a bone}
-
-\vspace{3pt}
-
-\choiceitem{C}{throw a spanner in the works}
-
-\vspace{3pt}
-
-\choiceitem{D}{throw caution to the wind}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{throw in the towel}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{throw yourself a bone}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{throw a spanner in the works}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{throw caution to the wind}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The children have inherited a \underline{\hspace{1.3cm}} tradition of music and dance from their ancestors.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{weather-beaten}\hfill \choiceitem{B}{fast-growing}\hfill \choiceitem{C}{down-market}\hfill \choiceitem{D}{deep-rooted}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{weather-beaten}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{fast-growing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{down-market}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{deep-rooted}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{He’s written one or two books but journalism is his \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{rice and salt}\hfill \choiceitem{B}{bread and salt}\hfill \choiceitem{C}{milk and bread}\hfill \choiceitem{D}{bread and butter}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{rice and salt}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{bread and salt}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{milk and bread}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{bread and butter}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Lan was very nervous during the English speaking test, but she managed to \underline{\hspace{1.3cm}} and answered confidently.}
 
-\vspace{6pt}
-\choiceitem{A}{pull herself together}
-
-\vspace{3pt}
-
-\choiceitem{B}{take things for granted}
-
-\vspace{3pt}
-
-\choiceitem{C}{catch someone’s eye}
-
-\vspace{3pt}
-
-\choiceitem{D}{let off steam}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{pull herself together}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{take things for granted}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{catch someone’s eye}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{let off steam}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{The deadline for the project is tomorrow, and I haven’t even started. I’m really \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{in a panic}\hfill \choiceitem{B}{in a bind}\hfill \choiceitem{C}{in a whirl}\hfill \choiceitem{D}{in a haze}}
 
 \question[Trắc nghiệm]{My brother plays his records \underline{\hspace{1.3cm}} in his room at night and nobody can get enough sleep.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{at full tilt}\hfill \choiceitem{B}{in full swing}\hfill \choiceitem{C}{in full cry}\hfill \choiceitem{D}{at full blast}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{at full tilt}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{in full swing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{in full cry}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{at full blast}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{When John decided to start his own business, he knew he was taking a big risk, but he was determined to \underline{\hspace{1.3cm}} and give it his all.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{play it safe}\hfill \choiceitem{B}{swing for the fences}\hfill \choiceitem{C}{cut corners}\hfill \choiceitem{D}{sit on the fence}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{play it safe}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{swing for the fences}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{cut corners}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{sit on the fence}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I don’t like a few things about my job, but \underline{\hspace{1.3cm}} it is quite enjoyable.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{by and large}\hfill \choiceitem{B}{by mistake}\hfill \choiceitem{C}{sooner or later}\hfill \choiceitem{D}{what is more}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{by and large}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{by mistake}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{sooner or later}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{what is more}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{It is \underline{\hspace{1.3cm}} for us to do anything about the chaotic traffic.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{out of date}\hfill \choiceitem{B}{without delay}\hfill \choiceitem{C}{out of the question}\hfill \choiceitem{D}{out of order}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{out of date}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{without delay}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{out of the question}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{out of order}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I just couldn’t remember her name even though it was on the \underline{\hspace{1.3cm}} of my tongue.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{edge}\hfill \choiceitem{B}{tip}\hfill \choiceitem{C}{top}\hfill \choiceitem{D}{front}}
 
 \question[Trắc nghiệm]{Li has \underline{\hspace{1.3cm}}; he loves cakes, chocolates, ice-cream - anything which is sweet.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{a sweet mouth}\hfill \choiceitem{B}{sweet lips}\hfill \choiceitem{C}{a sweet tongue}\hfill \choiceitem{D}{a sweet tooth}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{a sweet mouth}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{sweet lips}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{a sweet tongue}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{a sweet tooth}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{I accidentally \underline{\hspace{1.3cm}} Mike when I was crossing a street downtown yesterday.}
 
-\vspace{6pt}
-\choiceitem{A}{kept an eye on}
-
-\vspace{3pt}
-
-\choiceitem{B}{lost touch with}
-
-\vspace{3pt}
-
-\choiceitem{C}{paid attention to}
-
-\vspace{3pt}
-
-\choiceitem{D}{caught sight of}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{kept an eye on}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{lost touch with}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{paid attention to}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{caught sight of}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{If you want a flat in the center of the city you have to pay through the \underline{\hspace{1.3cm}} for it.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{teeth}\hfill \choiceitem{B}{back of your head}\hfill \choiceitem{C}{nose}\hfill \choiceitem{D}{arm}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{teeth}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{back of your head}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{nose}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{arm}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{\underline{\hspace{1.3cm}} wait for no man.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{Tide and fire}\hfill \choiceitem{B}{Time and tide}\hfill \choiceitem{C}{Time and fire}\hfill \choiceitem{D}{Tide and time}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{Tide and fire}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{Time and tide}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{Time and fire}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Tide and time}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Peter was born and brought up in Hasting and he knows it like the \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{nose on his face}
-
-\vspace{3pt}
-
-\choiceitem{B}{tip of his tongue}
-
-\vspace{3pt}
-
-\choiceitem{C}{back of his hand}
-
-\vspace{3pt}
-
-\choiceitem{D}{hair on his head}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{nose on his face}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{tip of his tongue}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{back of his hand}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{hair on his head}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Do I have to \underline{\hspace{1.3cm}} my age?}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{do}\hfill \choiceitem{B}{follow}\hfill \choiceitem{C}{act}\hfill \choiceitem{D}{see}}
 
 \question[Trắc nghiệm]{Sitting uncomfortably among many people he didn’t know, Joe was like \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
-\choiceitem{A}{water off a duck’s back}
-
-\vspace{3pt}
-
-\choiceitem{B}{a fish out of water}
-
-\vspace{3pt}
-
-\choiceitem{C}{a duck to water}
-
-\vspace{3pt}
-
-\choiceitem{D}{water under the bridge}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{water off a duck’s back}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{a fish out of water}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{a duck to water}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{water under the bridge}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{They agreed to the changes \underline{\hspace{1.3cm}} that they would be introduced gradually.}
 
-\vspace{6pt}
-\choiceitem{A}{with the conditions}
-
-\vspace{3pt}
-
-\choiceitem{B}{by the comprehension}
-
-\vspace{3pt}
-
-\choiceitem{C}{for the interpretation}
-
-\vspace{3pt}
-
-\choiceitem{D}{on the understanding}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{with the conditions}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{by the comprehension}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{for the interpretation}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{on the understanding}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Losing my job was a \underline{\hspace{1.3cm}}. I never would have found this one if it hadn’t happened.}
 
-\vspace{6pt}
-\choiceitem{A}{bleeding heart}
-
-\vspace{3pt}
-
-\choiceitem{B}{breath of fresh air}
-
-\vspace{3pt}
-
-\choiceitem{C}{blessing in disguise}
-
-\vspace{3pt}
-
-\choiceitem{D}{bone to pick with}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{bleeding heart}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{breath of fresh air}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{blessing in disguise}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{bone to pick with}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{William is an authority \underline{\hspace{1.3cm}} medieval tapestries.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{on}\hfill \choiceitem{B}{with}\hfill \choiceitem{C}{about}\hfill \choiceitem{D}{in}}
 
 \question[Trắc nghiệm]{I don’t like turning down work, but I’ll have to, I’m afraid I’ve got far too much \underline{\hspace{1.3cm}} at the moment.}
 
-\vspace{6pt}
-\noindent\makebox[\linewidth][s]{\choiceitem{A}{on my plate}\hfill \choiceitem{B}{in effect}\hfill \choiceitem{C}{on my mind}\hfill \choiceitem{D}{up my sleeves}}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{on my plate}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{in effect}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{on my mind}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{up my sleeves}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{Unemployment threat has been \underline{\hspace{1.3cm}} for a while now.}
 
-\vspace{6pt}
-\choiceitem{A}{daunting on the lookout}
-
-\vspace{3pt}
-
-\choiceitem{B}{intimidating on the air}
-
-\vspace{3pt}
-
-\choiceitem{C}{overwhelming on the wing}
-
-\vspace{3pt}
-
-\choiceitem{D}{looming on the horizon}
+\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{A}{daunting on the lookout}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{B}{intimidating on the air}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{C}{overwhelming on the wing}\par\vspace{4pt}
+\noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{looming on the horizon}\par\vspace{4pt}
 
 \question[Trắc nghiệm]{We may win, we may lose – it’s just the luck of the \underline{\hspace{1.3cm}}.}
 
-\vspace{6pt}
+\par\vspace{4pt}
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{draw}\hfill \choiceitem{B}{odd}\hfill \choiceitem{C}{fate}\hfill \choiceitem{D}{chance}}
 
 \end{document}

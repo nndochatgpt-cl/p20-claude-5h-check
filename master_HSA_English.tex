@@ -164,8 +164,8 @@
 }
 
 \newtcolorbox{groupbox}[1]{
-    enhanced, colback=secondaryBlue, colframe=accentBlue,
-    coltext=white, boxrule=0.8pt, arc=1.5mm,
+    enhanced, colback=accentBlue, colframe=accentBlue,
+    coltext=white, fontupper=\bfseries, boxrule=0.8pt, arc=1.5mm,
     left=8pt, right=8pt, top=4pt, bottom=4pt,
     before skip=12pt, after skip=8pt
 }
@@ -292,9 +292,44 @@
     \par\vspace{6pt}%
 }
 
+% ============================================================
+% QR PLACEHOLDER BOX
+% ============================================================
+\newcommand{\qrplaceholder}[1]{%
+    \begin{tikzpicture}
+        \draw[primaryBlue, line width=1.2pt, dashed, fill=pastelBlue]
+            (0,0) rectangle (#1,#1);
+        \draw[primaryBlue, line width=0.6pt]
+            (0.12*#1,0.12*#1) rectangle (0.88*#1,0.88*#1);
+        \node[primaryBlue, font=\bfseries] at (0.5*#1,0.58*#1) {QR CODE};
+        \node[primaryBlue, font=\small] at (0.5*#1,0.38*#1) {(placeholder)};
+    \end{tikzpicture}%
+}
+\newcommand{\qrbox}[3][3cm]{%
+    % #1 = QR image size (default 3cm), #2 = title, #3 = subtitle/caption
+    \begin{center}
+    \begin{tcolorbox}[enhanced, colback=pastelBlue, colframe=primaryBlue,
+        rounded corners, arc=3mm, boxrule=1.2pt,
+        drop shadow={shadow xshift=2pt, shadow yshift=-2pt, opacity=0.25},
+        width=0.9\linewidth, halign=center]
+        {\color{primaryBlue}\bfseries\large #2}\par\vspace{8pt}
+        \qrplaceholder{#1}\par\vspace{6pt}
+        {\color{textDark}\small\itshape #3}
+    \end{tcolorbox}
+    \end{center}%
+}
+
+\setcounter{tocdepth}{2}
+
 \begin{document}
 \raggedbottom
+\renewcommand{\contentsname}{}
 
+\subheading{Mục lục}
+\tableofcontents
+\newpage
+
+\phantomsection\addcontentsline{toc}{section}{PHẦN 1: MA TRẬN ĐỀ THI}
 \partbanner{PHẦN 1}{MA TRẬN ĐỀ THI}
 \subheading{1.1. Ma trận đề thi ĐGNL -- Đại học Quốc gia Hà Nội -- Phần Ngoại ngữ}
 
@@ -418,8 +453,14 @@
 \item \textbf{Cách tính điểm:} 1 điểm/câu đúng. Tổng điểm: 50 điểm.
 \end{itemize}
 
+\vfill
+\qrbox[3cm]{THAM GIA NHÓM HỌC TẬP P20 STUDY}{Quét mã QR để tham gia nhóm học tập và nhận tài liệu ôn thi mới nhất.}
+\vspace{1cm}
+
 \newpage
+\phantomsection\addcontentsline{toc}{section}{PHẦN 2: CÁC DẠNG BÀI TRONG ĐỀ THI}
 \partbanner{PHẦN 2}{CÁC DẠNG BÀI TRONG ĐỀ THI}
+\phantomsection\addcontentsline{toc}{subsection}{Dạng 1: Chọn đáp án đúng -- 10 câu tổng hợp}
 \begin{topicbox}{\large DẠNG 1: CHỌN ĐÁP ÁN ĐÚNG -- 10 CÂU TỔNG HỢP}
 \textit{Chọn phương án đúng (A, B, C hoặc D) để hoàn thành câu.}
 \end{topicbox}
@@ -2934,6 +2975,7 @@
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{draw}\hfill \choiceitem{B}{odd}\hfill \choiceitem{C}{fate}\hfill \choiceitem{D}{chance}}
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Dạng 2: Tình huống giao tiếp}
 \begin{topicbox}{\large DẠNG 2: TÌNH HUỐNG GIAO TIẾP}
 \textit{Chọn phương án đúng (A, B, C hoặc D) để hoàn thành đoạn hội thoại.}
 \end{topicbox}
@@ -3340,6 +3382,7 @@
 
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Dạng 3: Đồng nghĩa -- trái nghĩa}
 \begin{topicbox}{\large DẠNG 3: ĐỒNG NGHĨA -- TRÁI NGHĨA}
 \textit{Chọn phương án đúng (A, B, C hoặc D) đồng nghĩa/trái nghĩa với từ/cụm từ in đậm.}
 \end{topicbox}
@@ -3835,6 +3878,7 @@
 \noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{relinquish one's power}\par\vspace{4pt}
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Dạng 4: Sắp xếp hội thoại}
 \begin{topicbox}{\large DẠNG 4: SẮP XẾP HỘI THOẠI}
 \textit{Sắp xếp các câu cho sẵn thành đoạn hội thoại hoàn chỉnh, sau đó chọn phương án đúng.}
 \end{topicbox}
@@ -4491,6 +4535,7 @@
 
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Dạng 5: Viết lại câu}
 \begin{topicbox}{\large DẠNG 5: VIẾT LẠI CÂU}
 \textit{Chọn phương án (A, B, C hoặc D) viết lại câu sao cho nghĩa không đổi.}
 \end{topicbox}
@@ -5220,6 +5265,7 @@
 
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Dạng 6: Đục lỗ}
 \begin{topicbox}{\large DẠNG 6: ĐỤC LỖ}
 \textit{Đọc đoạn văn và chọn phương án đúng (A, B, C hoặc D) để điền vào mỗi chỗ trống.}
 \end{topicbox}
@@ -6254,6 +6300,7 @@ In conclusion, self-discipline is an ongoing process that proves \textbf{(25)}~\
 
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Dạng 7: Đọc hiểu}
 \begin{topicbox}{\large DẠNG 7: ĐỌC HIỂU}
 \textit{Đọc đoạn văn và chọn phương án đúng (A, B, C hoặc D).}
 \end{topicbox}
@@ -7360,6 +7407,7 @@ Countries around the world have set ambitious targets for renewable energy adopt
 
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Dạng 8: Logical thinking}
 \begin{topicbox}{\large DẠNG 8: LOGICAL THINKING}
 \textit{Chọn phương án đúng (A, B, C hoặc D) dựa trên tư duy logic và khả năng giải quyết vấn đề.}
 \end{topicbox}
@@ -7910,8 +7958,10 @@ Countries around the world have set ambitious targets for renewable energy adopt
 
 
 \newpage
+\phantomsection\addcontentsline{toc}{section}{PHẦN 3: ĐỀ MINH HOẠ}
 \partbanner{PHẦN 3}{ĐỀ MINH HOẠ}
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Đề số 01}
 \begin{topicbox}{\large ĐỀ SỐ 01}
 \textit{Đề minh họa HSA -- Phần Ngoại ngữ (Tiếng Anh) -- 50 câu -- 60 phút.}
 \end{topicbox}
@@ -8368,6 +8418,7 @@ Amanda Lenhart, deputy director of the Better Life Lab at New America doesn’t 
 \noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Alex is given a voucher for future purchases after returning a defective product.}\par\vspace{4pt}
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Đề số 02}
 \begin{topicbox}{\large ĐỀ SỐ 02}
 \textit{Đề minh họa HSA -- Phần Ngoại ngữ (Tiếng Anh) -- 50 câu -- 60 phút.}
 \end{topicbox}
@@ -8807,6 +8858,7 @@ The renewed interest in cooking is primarily a response to the level of obesity 
 \noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{Sarah was unhappy with her meal at a restaurant. The manager apologised and offered her a complimentary dessert.}\par\vspace{4pt}
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Đề số 03}
 \begin{topicbox}{\large ĐỀ SỐ 03}
 \textit{Đề minh họa HSA -- Phần Ngoại ngữ (Tiếng Anh) -- 50 câu -- 60 phút.}
 \end{topicbox}
@@ -9235,7 +9287,9 @@ Baby Boomers may be expected to live longer than their predecessors, but a recen
 
 
 \newpage
+\phantomsection\addcontentsline{toc}{section}{PHỤ LỤC: BÀI TẬP BỔ TRỢ CHUYÊN ĐỀ}
 \partbanner{PHỤ LỤC}{BÀI TẬP BỔ TRỢ CHUYÊN ĐỀ}
+\phantomsection\addcontentsline{toc}{subsection}{Phụ lục 1: Mệnh đề quan hệ}
 \subheading{Phụ lục 1: Mệnh đề quan hệ}
 \noindent Mệnh đề quan hệ là mệnh đề phụ được nối với mệnh đề chính bởi các đại từ quan hệ (who, whom, whose, which, that) hay các trạng từ quan hệ như (where, when, why). Mệnh đề quan hệ đứng ngay đằng sau danh từ, đại từ trong mệnh đề chính để bổ sung ý nghĩa cho danh từ, đại từ ấy, phân biệt danh từ, đại từ ấy với các danh từ, đại từ khác.\par\vspace{6pt}
 \subheading{1. Các loại mệnh đề quan hệ}
@@ -9647,6 +9701,7 @@ Location: Riverdale Community Center
 \noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{operated}\par\vspace{4pt}
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Phụ lục 2: Từ loại}
 \subheading{Phụ lục 2: Từ loại}
 \subheading{Dấu hiệu nhận biết từ loại}
 \par\noindent\hspace{2em}Với danh từ bao gồm các đuôi phổ biến như sau:\par
@@ -9971,6 +10026,7 @@ Thank you for your cooperation.
 \noindent\makebox[\linewidth][s]{\choiceitem{A}{decide}\hfill \choiceitem{B}{decision}\hfill \choiceitem{C}{decisive}\hfill \choiceitem{D}{decided}}
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Phụ lục 3: Thì và sự phối thì}
 \subheading{Phụ lục 3: Thì và sự phối thì}
 \subheading{1. Các quy tắc}
 \par\noindent\textbf{\large 1.1. WHEN}\par\vspace{2pt}
@@ -10067,6 +10123,7 @@ Thank you for your cooperation.
 \item Before I \textbf{(start)} \underline{\hspace{1.3cm}} the car, all passengers had buckled their seat belts.
 \end{enumerate}
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Phụ lục 4: Lượng từ, mạo từ, sự hoà hợp chủ vị}
 \subheading{Phụ lục 4: Lượng từ, mạo từ, sự hoà hợp chủ vị}
 \subheading{1. Lượng từ}
 {\small
@@ -10422,6 +10479,7 @@ Xác định (The) & 1. Dùng trước danh từ chỉ người/vật đã xác 
 \item 80\% of the students \textbf{(have)} voted.
 \end{enumerate}
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Phụ lục 5: Câu điều kiện}
 \subheading{Phụ lục 5: Câu điều kiện}
 \subheading{1. Các loại câu điều kiện}
 \noindent Có ba loại câu điều kiện: loại 1 (câu điều kiện có thật trong hiện tại hoặc tương lai), loại 2 (câu điều kiện không có thật trong hiện tại), loại 3 (câu điều kiện không có thật trong quá khứ.)\par\vspace{6pt}
@@ -10745,6 +10803,7 @@ If + S + V (quá khứ đơn), S + would/could/might + have + Vp2 & Kết hợp 
 \noindent\hangindent=2.2em\hangafter=1\choiceitem{D}{would approve}\par\vspace{4pt}
 
 \newpage
+\phantomsection\addcontentsline{toc}{subsection}{Phụ lục 6: Cấu trúc thông dụng}
 \subheading{Phụ lục 6: Cấu trúc thông dụng}
 {\small
 \renewcommand{\arraystretch}{1.25}
@@ -10923,6 +10982,18 @@ If + S + V (quá khứ đơn), S + would/could/might + have + Vp2 & Kết hợp 
 \hline
 \end{longtable}
 }
+
+\newpage
+\thispagestyle{fancy}
+\vspace{3cm}
+\qrbox[4.5cm]{THAM GIA NHÓM HỌC TẬP P20 STUDY}{Quét mã QR để tham gia nhóm học tập, nhận tài liệu ôn thi và cập nhật đề thi mới nhất từ P20 STUDY.}
+\vspace{1cm}
+\begin{center}
+\textcolor{secondaryBlue}{\textit{Chúc các bạn ôn thi hiệu quả và đạt kết quả cao!}}
+
+\vspace{10pt}
+\textcolor{primaryBlue}{\textbf{\Large P20 STUDY -- Học đúng tầm -- Chọn đúng nghề}}
+\end{center}
 
 \end{document}
 

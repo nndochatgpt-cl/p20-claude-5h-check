@@ -107,9 +107,10 @@ CUỐI CÙNG: bảng tổng hợp | Câu | Dạng | Độ khó | Mức | Kỹ n�
 
 ## GỢI Ý HÌNH ẢNH
 
-| Hình | Đặt ở | Caption | Từ khóa tìm ảnh |
-|---|---|---|---|
-| Hình 1 | Sau đoạn [2] (Berthollet ở Ai Cập) | Hình 1: Lớp natron kết tinh ở bờ một hồ muối vùng Wadi El Natrun (Ai Cập). | `Wadi El Natrun salt lake`, `natron deposits Egypt lake shore` |
-| Hình 2 | Sau Bảng 1 | Hình 2: Từ trái sang phải: Berthollet, Guldberg, Waage, van 't Hoff. | `Claude Louis Berthollet portrait`, `Guldberg Waage portrait`, `Jacobus van 't Hoff portrait` (ghép 4 chân dung thành 1 dải) |
+Chỉ dùng 1 hình (đề làm trong ~15 phút, Hình 2 chân dung bị bỏ vì không mang thêm dữ kiện để trả lời câu hỏi).
 
-Nguồn ghi dưới mỗi hình: một nguồn duy nhất (trang gốc của ảnh; ảnh Việt hóa ghi thêm "(Việt hóa)").
+| Hình | Đặt ở | Caption | Nguồn đã chọn |
+|---|---|---|---|
+| Hình 1 | Sau đoạn [2] (Berthollet ở Ai Cập) | Hình 1: Lớp natron kết tinh ở bờ một hồ muối vùng Wadi El Natrun (Ai Cập). | saltworkconsultants.com — "Wadi-el-Natrun-depression-Egypt" |
+
+Nguồn ghi dưới hình: một nguồn duy nhất (trang gốc của ảnh).

@@ -222,10 +222,11 @@ CUỐI CÙNG: bảng tổng hợp | Câu | Dạng | Độ khó | Mức | Kỹ n�
 Đề làm trong 30 phút, nên mỗi đề chỉ 1–2 hình, đặt đúng mạch (ngay sau đoạn nhắc tới).
 
 ### Đề 4
-| Hình | Đặt ở | Caption | Từ khóa tìm ảnh |
+Chỉ dùng 1 hình (Hình 2 chân dung bị bỏ, không mang thêm dữ kiện trả lời câu hỏi).
+
+| Hình | Đặt ở | Caption | Nguồn đã chọn |
 |---|---|---|---|
-| Hình 1 | Sau đoạn [2] (Berthollet ở Ai Cập) | Hình 1: Lớp natron kết tinh ở bờ một hồ muối vùng Wadi El Natrun (Ai Cập). | `Wadi El Natrun salt lake`, `natron deposits Egypt lake shore` |
-| Hình 2 | Sau Bảng 1 | Hình 2: Từ trái sang phải: Berthollet, Guldberg, Waage, van 't Hoff. | `Claude Louis Berthollet portrait`, `Guldberg Waage portrait`, `Jacobus van 't Hoff portrait` (ghép 4 chân dung thành 1 dải) |
+| Hình 1 | Sau đoạn [2] (Berthollet ở Ai Cập) | Hình 1: Lớp natron kết tinh ở bờ một hồ muối vùng Wadi El Natrun (Ai Cập). | saltworkconsultants.com — "Wadi-el-Natrun-depression-Egypt" — đã lưu `image/de4_hinh1.webp` |
 
 ### Đề 5
 | Hình | Đặt ở | Caption | Từ khóa tìm ảnh |
